@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
-  * File Name          : main.c
-  * Date               : 23/05/2015 12:30:45
+  * File Name          : main.cpp
+  * Date               : 23/05/2015 12:22:05
   * Description        : Main program body
   ******************************************************************************
   *
@@ -36,7 +36,10 @@
 #include "stm32f1xx_hal.h"
 
 /* USER CODE BEGIN Includes */
-
+#include "ecg_Core.h"
+#include "ecg_SoC.h"
+#include "ecg_Application.h"
+#include "ecg_SecureAuth.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/

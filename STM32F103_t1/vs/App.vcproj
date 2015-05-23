@@ -174,6 +174,66 @@
 				Name="Header Files"
 				>
 				<File
+					RelativePath="..\Inc\ecg_Aes.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Inc\ecg_Application.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Inc\ecg_BoundedQueue.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Inc\ecg_Checksum.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Inc\ecg_Command.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Inc\ecg_Core.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Inc\ecg_ECGDevice.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Inc\ecg_Lead.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Inc\ecg_NonCopyable.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Inc\ecg_PcbVersion.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Inc\ecg_Protocol.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Inc\ecg_SecureAuth.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Inc\ecg_SoC.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Inc\ecg_SysUtils.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Inc\ecg_TLC3541.h"
+					>
+				</File>
+				<File
 					RelativePath="..\Inc\stm32f1xx_hal_conf.h"
 					>
 				</File>
@@ -186,7 +246,7 @@
 				Name="Source Files"
 				>
 				<File
-					RelativePath="..\Src\main.c"
+					RelativePath="..\Src\main.cpp"
 					>
 				</File>
 				<File
