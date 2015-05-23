@@ -1,8 +1,9 @@
 /*
  *
- * Copyright 2008-2015 Gary Chen, All Rights Reserved
- * 
+ * Copyright 2008-2015 PHS, All Rights Reserved
+ *
  * Written by Jeff Kuang (kuangjunjie@phs-med.com)
+ *
  */
 #include "ecg_SecureAuth.h"
 #include <stdio.h>

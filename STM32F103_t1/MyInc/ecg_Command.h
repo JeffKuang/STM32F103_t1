@@ -1,8 +1,8 @@
 /*
  *
- * Copyright 2008-2010 Gary Chen, All Rights Reserved
+ * Copyright 2008-2015 PHS, All Rights Reserved
  *
- * Written by Lisen (wzlyhcn@gmail.com)
+ * Written by Jeff Kuang (kuangjunjie@phs-med.com)
  *
  */
 #ifndef ECG_COMMAND_H

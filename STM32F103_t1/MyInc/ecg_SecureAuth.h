@@ -1,3 +1,10 @@
+/*
+ *
+ * Copyright 2008-2015 PHS, All Rights Reserved
+ *
+ * Written by Jeff Kuang (kuangjunjie@phs-med.com)
+ *
+ */
 #ifndef ECG_SECUREAUTH_H
 #define ECG_SECUREAUTH_H
 #include "ecg_SysUtils.h"

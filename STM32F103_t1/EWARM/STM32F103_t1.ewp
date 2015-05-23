@@ -713,7 +713,7 @@
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state></state>
+          <state>$TOOLKIT_DIR$\config\linker\ST\stm32f103x8.icf</state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>
@@ -955,6 +955,30 @@
     </group>
     <group>
       <name>User</name>
+      <file>
+        <name>$PROJ_DIR$\..\MySrc\ecg_Application.cpp</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\MySrc\ecg_Checksum.cpp</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\MySrc\ecg_ECGDevice.cpp</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\MySrc\ecg_Protocol.cpp</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\MySrc\ecg_SecureAuth.cpp</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\MySrc\ecg_SoC.cpp</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\MySrc\ecg_SysUtils.cpp</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\MySrc\ecg_TLC3541.cpp</name>
+      </file>
       <file>
         <name>$PROJ_DIR$\..\MySrc\main.cpp</name>
       </file>

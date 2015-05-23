@@ -174,107 +174,255 @@
 				Name="Header Files"
 				>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\core_cm3.h"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\misc.h"
+					RelativePath="..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\stm32f100xb.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x.h"
+					RelativePath="..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\stm32f100xe.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_adc.h"
+					RelativePath="..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\stm32f101x6.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_bkp.h"
+					RelativePath="..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\stm32f101xb.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_can.h"
+					RelativePath="..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\stm32f101xe.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_conf.h"
+					RelativePath="..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\stm32f101xg.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_crc.h"
+					RelativePath="..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\stm32f102x6.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_dac.h"
+					RelativePath="..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\stm32f102xb.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_dbgmcu.h"
+					RelativePath="..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\stm32f103x6.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_dma.h"
+					RelativePath="..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\stm32f103xb.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_exti.h"
+					RelativePath="..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\stm32f103xe.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_flash.h"
+					RelativePath="..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\stm32f103xg.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_fsmc.h"
+					RelativePath="..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\stm32f105xc.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_gpio.h"
+					RelativePath="..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\stm32f107xc.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_i2c.h"
+					RelativePath="..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\stm32f1xx.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_iwdg.h"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_pwr.h"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_adc.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_rcc.h"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_adc_ex.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_rtc.h"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_can.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_sdio.h"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_can_ex.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_spi.h"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_cec.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_tim.h"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_conf_template.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_usart.h"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_cortex.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\stm32f10x_wwdg.h"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_crc.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\STM32F10x_StdPeriph_Driver\system_stm32f10x.h"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_dac.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_dac_ex.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_def.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_dma.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_dma_ex.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_eth.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash_ex.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio_ex.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_hcd.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_i2c.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_i2s.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_irda.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_iwdg.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_nand.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_nor.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_pccard.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_pcd.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_pcd_ex.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_pwr.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc_ex.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rtc.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rtc_ex.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_sd.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_smartcard.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_spi.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_sram.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_tim.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_tim_ex.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_uart.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_usart.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_wwdg.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_ll_fsmc.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_ll_sdmmc.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_ll_usb.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\system_stm32f1xx.h"
 					>
 				</File>
 			</Filter>
@@ -282,99 +430,183 @@
 				Name="Source Files"
 				>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\core_cm3.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\misc.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\stm32f10x_adc.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_adc_ex.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\stm32f10x_bkp.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_can.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\stm32f10x_can.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cec.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\stm32f10x_crc.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\stm32f10x_dac.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_crc.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\stm32f10x_dbgmcu.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dac.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\stm32f10x_dma.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dac_ex.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\stm32f10x_exti.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\stm32f10x_flash.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_eth.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\stm32f10x_fsmc.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\stm32f10x_gpio.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\stm32f10x_i2c.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\stm32f10x_iwdg.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\stm32f10x_pwr.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_hcd.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\stm32f10x_rcc.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_i2c.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\stm32f10x_rtc.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_i2s.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\stm32f10x_sdio.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_irda.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\stm32f10x_spi.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_iwdg.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\stm32f10x_tim.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_msp_template.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\stm32f10x_usart.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_nand.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\stm32f10x_wwdg.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_nor.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\STM32F10x_StdPeriph_Driver\system_stm32f10x.c"
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pccard.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pcd.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pcd_ex.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rtc.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rtc_ex.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_sd.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_smartcard.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_spi.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_spi_ex.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_sram.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_usart.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_wwdg.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_ll_fsmc.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_ll_sdmmc.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_ll_usb.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Drivers\CMSIS\Device\ST\STM32F1xx\Source\Templates\system_stm32f1xx.c"
 					>
 				</File>
 			</Filter>
@@ -388,59 +620,63 @@
 				Name="Header Files"
 				>
 				<File
-					RelativePath="..\..\include\ecg_Aes.h"
+					RelativePath="..\MyInc\ecg_Aes.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\ecg_Application.h"
+					RelativePath="..\MyInc\ecg_Application.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\ecg_BoundedQueue.h"
+					RelativePath="..\MyInc\ecg_BoundedQueue.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\ecg_Checksum.h"
+					RelativePath="..\MyInc\ecg_Checksum.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\ecg_Command.h"
+					RelativePath="..\MyInc\ecg_Command.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\ecg_Core.h"
+					RelativePath="..\MyInc\ecg_Core.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\ecg_ECGDevice.h"
+					RelativePath="..\MyInc\ecg_ECGDevice.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\ecg_Lead.h"
+					RelativePath="..\MyInc\ecg_Lead.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\ecg_NonCopyable.h"
+					RelativePath="..\MyInc\ecg_NonCopyable.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\ecg_PcbVersion.h"
+					RelativePath="..\MyInc\ecg_PcbVersion.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\ecg_Protocol.h"
+					RelativePath="..\MyInc\ecg_Protocol.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\ecg_SoC.h"
+					RelativePath="..\MyInc\ecg_SecureAuth.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\ecg_SysUtils.h"
+					RelativePath="..\MyInc\ecg_SoC.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\ecg_TLC3541.h"
+					RelativePath="..\MyInc\ecg_SysUtils.h"
+					>
+				</File>
+				<File
+					RelativePath="..\MyInc\ecg_TLC3541.h"
 					>
 				</File>
 			</Filter>
@@ -448,35 +684,39 @@
 				Name="Source Files"
 				>
 				<File
-					RelativePath="..\..\src\ecg_Application.cpp"
+					RelativePath="..\MySrc\ecg_Application.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\ecg_Checksum.cpp"
+					RelativePath="..\MySrc\ecg_Checksum.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\ecg_ECGDevice.cpp"
+					RelativePath="..\MySrc\ecg_ECGDevice.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\ecg_Protocol.cpp"
+					RelativePath="..\MySrc\ecg_Protocol.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\ecg_SoC.cpp"
+					RelativePath="..\MySrc\ecg_SecureAuth.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\ecg_SysUtils.cpp"
+					RelativePath="..\MySrc\ecg_SoC.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\ecg_TLC3541.cpp"
+					RelativePath="..\MySrc\ecg_SysUtils.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\main.cpp"
+					RelativePath="..\MySrc\ecg_TLC3541.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\MySrc\main.cpp"
 					>
 				</File>
 			</Filter>
