@@ -229,87 +229,87 @@ void SoC::configureGPIO()
     GPIO_InitTypeDef initTypeDef;
 
     // 配置USART1的RX
-    initTypeDef.GPIO_Pin = GPIO_Pin_10;
-    initTypeDef.GPIO_Speed = GPIO_Speed_50MHz;
-    initTypeDef.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-    GPIO_Init(GPIOA, &initTypeDef);
+    initTypeDef.Pin = GPIO_PIN_10;
+    initTypeDef.Speed = GPIO_SPEED_HIGH;
+    initTypeDef.Mode = GPIO_MODE_AF_INPUT;
+    HAL_GPIO_Init(GPIOA, &initTypeDef);
 
     // 配置USART1的TX
-    initTypeDef.GPIO_Pin = GPIO_Pin_9;
-    initTypeDef.GPIO_Speed = GPIO_Speed_50MHz;
-    initTypeDef.GPIO_Mode = GPIO_Mode_AF_PP;
-    GPIO_Init(GPIOA, &initTypeDef);
+    initTypeDef.Pin = GPIO_PIN_9;
+    initTypeDef.Speed = GPIO_SPEED_HIGH;
+    initTypeDef.Mode = GPIO_MODE_AF_PP;
+    HAL_GPIO_Init(GPIOA, &initTypeDef);
 
     // 配置导联选择器F0，F1和F2
-    initTypeDef.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6;
-    initTypeDef.GPIO_Speed = GPIO_Speed_50MHz;
-    initTypeDef.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_Init(GPIOA, &initTypeDef);
+    initTypeDef.Pin = GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6;
+    initTypeDef.Speed = GPIO_SPEED_HIGH;
+    initTypeDef.Mode = GPIO_MODE_OUTPUT_PP;
+    HAL_GPIO_Init(GPIOA, &initTypeDef);
 
     // 配置增益选择器F4和F5
-    initTypeDef.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1;
-    initTypeDef.GPIO_Speed = GPIO_Speed_50MHz;
-    initTypeDef.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_Init(GPIOB, &initTypeDef);
+    initTypeDef.Pin = GPIO_PIN_0 | GPIO_PIN_1;
+    initTypeDef.Speed = GPIO_SPEED_HIGH;
+    initTypeDef.Mode = GPIO_MODE_OUTPUT_PP;
+    HAL_GPIO_Init(GPIOB, &initTypeDef);
 
     // 配置信号复位F3
-    initTypeDef.GPIO_Pin = GPIO_Pin_7;
-    initTypeDef.GPIO_Speed = GPIO_Speed_50MHz;
-    initTypeDef.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_Init(GPIOA, &initTypeDef);
+    initTypeDef.Pin = GPIO_PIN_7;
+    initTypeDef.Speed = GPIO_SPEED_HIGH;
+    initTypeDef.Mode = GPIO_MODE_OUTPUT_PP;
+    HAL_GPIO_Init(GPIOA, &initTypeDef);
 
     // 配置信号滤波器之选择器FS0和FS1
-    initTypeDef.GPIO_Pin = GPIO_Pin_5 | GPIO_Pin_6;
-    initTypeDef.GPIO_Speed = GPIO_Speed_50MHz;
-    initTypeDef.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_Init(GPIOB, &initTypeDef);
+    initTypeDef.Pin = GPIO_PIN_5 | GPIO_PIN_6;
+    initTypeDef.Speed = GPIO_SPEED_HIGH;
+    initTypeDef.Mode = GPIO_MODE_OUTPUT_PP;
+    HAL_GPIO_Init(GPIOB, &initTypeDef);
 
     // 配置导联警告F6
-    initTypeDef.GPIO_Pin = GPIO_Pin_10;
-    initTypeDef.GPIO_Speed = GPIO_Speed_50MHz;
-    initTypeDef.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-    GPIO_Init(GPIOB, &initTypeDef);
+    initTypeDef.Pin = GPIO_PIN_10;
+    initTypeDef.Speed = GPIO_SPEED_HIGH;
+    initTypeDef.Mode = GPIO_MODE_INPUT;
+    HAL_GPIO_Init(GPIOB, &initTypeDef);
 
     // 配置SPI2的SCK和MOSI
-    initTypeDef.GPIO_Pin = GPIO_Pin_13 | GPIO_Pin_15;
-    initTypeDef.GPIO_Speed = GPIO_Speed_50MHz;
-    initTypeDef.GPIO_Mode = GPIO_Mode_AF_PP;
-    GPIO_Init(GPIOB, &initTypeDef);
+    initTypeDef.Pin = GPIO_PIN_13 | GPIO_PIN_15;
+    initTypeDef.Speed = GPIO_SPEED_HIGH;
+    initTypeDef.Mode = GPIO_MODE_AF_PP;
+    HAL_GPIO_Init(GPIOB, &initTypeDef);
 
     // 配置SPI2的NSS
-    initTypeDef.GPIO_Pin = GPIO_Pin_12;
-    initTypeDef.GPIO_Speed = GPIO_Speed_50MHz;
-    initTypeDef.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_Init(GPIOB, &initTypeDef);
+    initTypeDef.Pin = GPIO_PIN_12;
+    initTypeDef.Speed = GPIO_SPEED_HIGH;
+    initTypeDef.Mode = GPIO_MODE_OUTPUT_PP;
+    HAL_GPIO_Init(GPIOB, &initTypeDef);
 
     // 配置SPI2的MISO
-    initTypeDef.GPIO_Pin = GPIO_Pin_14;
-    initTypeDef.GPIO_Speed = GPIO_Speed_50MHz;
-    initTypeDef.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-    GPIO_Init(GPIOB, &initTypeDef);
+    initTypeDef.Pin = GPIO_PIN_14;
+    initTypeDef.Speed = GPIO_SPEED_HIGH;
+    initTypeDef.Mode = GPIO_MODE_AF_INPUT;
+    HAL_GPIO_Init(GPIOB, &initTypeDef);
 
-// 	initTypeDef.GPIO_Pin = GPIO_Pin_0;
-// 	initTypeDef.GPIO_Mode = GPIO_Mode_AIN;
+// 	initTypeDef.Pin = GPIO_PIN_0;
+// 	initTypeDef.Mode = GPIO_MODE_INPUT;
 // 	GPIO_Init(GPIOA, &initTypeDef);
 
     // 调试用
-    initTypeDef.GPIO_Pin = GPIO_Pin_0;
-    initTypeDef.GPIO_Speed = GPIO_Speed_50MHz;
-    initTypeDef.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_Init(GPIOA, &initTypeDef);
+    initTypeDef.Pin = GPIO_PIN_0;
+    initTypeDef.Speed = GPIO_SPEED_HIGH;
+    initTypeDef.Mode = GPIO_MODE_OUTPUT_PP;
+    HAL_GPIO_Init(GPIOA, &initTypeDef);
 }
 
 void SoC::configureUSART1()
 {
-    USART_InitTypeDef initTypeDef;
+    UART_InitTypeDef initTypeDef;
 
-    initTypeDef.USART_BaudRate = USART1_BaudRate;
-    initTypeDef.USART_WordLength = USART_WordLength_9b;
-    initTypeDef.USART_StopBits = USART_StopBits_1;
-    initTypeDef.USART_Parity = USART_Parity_Odd;
-    initTypeDef.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-    initTypeDef.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-    USART_Init(USART1, &initTypeDef);
+    initTypeDef.BaudRate = USART1_BaudRate;
+    initTypeDef.WordLength = UART_WORDLENGTH_9B;
+    initTypeDef.StopBits = UART_STOPBITS_1;
+    initTypeDef.Parity = UART_PARITY_ODD;
+    initTypeDef.HwFlowCtl = UART_HWCONTROL_NONE;
+    initTypeDef.Mode = UART_MODE_TX_RX;
+    HAL_UART_Init(USART1, &initTypeDef);
     USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
 #if USE_USART1_TX_DMA
     USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
@@ -321,16 +321,16 @@ void SoC::configureSPI2()
 {
     SPI_InitTypeDef initTypeDef;
 
-    initTypeDef.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
-    initTypeDef.SPI_Mode = SPI_Mode_Master;
-    initTypeDef.SPI_DataSize = SPI_DataSize_8b;
-    initTypeDef.SPI_CPOL = SPI_CPOL_High;
-    initTypeDef.SPI_CPHA = SPI_CPHA_1Edge;
-    initTypeDef.SPI_NSS = SPI_NSS_Soft;
-    initTypeDef.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_64;
-    initTypeDef.SPI_FirstBit = SPI_FirstBit_MSB;
-    initTypeDef.SPI_CRCPolynomial = 7;
-    SPI_Init(SPI2, &initTypeDef);
+    initTypeDef.Direction = SPI_DIRECTION_2LINES;
+    initTypeDef.Mode = SPI_MODE_MASTER;
+    initTypeDef.DataSize = SPI_DATASIZE_8BIT;
+    initTypeDef.CLKPolarity = SPI_POLARITY_HIGH;
+    initTypeDef.CLKPhase = SPI_PHASE_1EDGE;
+    initTypeDef.NSS = SPI_NSS_SOFT;
+    initTypeDef.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_64;
+    initTypeDef.FirstBit = SPI_FIRSTBIT_MSB;
+    initTypeDef.CRCPolynomial = 7;
+    HAL_SPI_Init(SPI2, &initTypeDef);
     SPI_SSOutputCmd(SPI2, ENABLE);
     SPI_Cmd(SPI2, ENABLE);
 }

@@ -69,7 +69,8 @@ void ECGDevice::initialize()
 {
     m_adc.initialize();
     setSignalReset(false);
-    for (byte filterType = bftFilter0; filterType < BuiltInFilterTypeCount; ++filterType) {
+    for (byte filterType = bftFilter0; filterType < BuiltInFilterTypeCount; 
+		++filterType) {
         setupBuiltInFilter(static_cast<BuiltInFilterType>(filterType), false);
     }
     loadCalibrateResult();
@@ -116,9 +117,9 @@ ECGLead& ECGDevice::getLead(LeadType leadType)
 void ECGDevice::setSignalReset(bool signalReset)
 {
 #if PCB_VERSION < 3
-    GPIO_WriteBit(GPIOA, GPIO_Pin_7, signalReset ? Bit_RESET : Bit_SET);
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, signalReset ? GPIO_PIN_RESET : GPIO_PIN_SET);
 #else
-    GPIO_WriteBit(GPIOA, GPIO_Pin_7, signalReset ? Bit_SET : Bit_RESET);
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, signalReset ? GPIO_PIN_SET : GPIO_PIN_RESET);
 #endif
 }
 
@@ -132,7 +133,8 @@ void ECGDevice::startCalibrateSignal()
             ECGLead& lead = m_leads[leadType];
             lead.gainTypeBackup = lead.gainType; // 备份当前增益，以便校准完成后还原之
             lead.gainType = static_cast<LeadGainType>(m_calibratedLeadGainType);
-            for (byte leadGainType = lgtX1; leadGainType < LeadGainTypeCount; ++leadGainType) {
+            for (byte leadGainType = lgtX1; leadGainType < LeadGainTypeCount; 
+				++leadGainType) {
                 lead.pointOffsets[leadGainType] = 0;
                 lead.pointOffsetSums[leadGainType] = 0;
             }
@@ -151,8 +153,10 @@ void ECGDevice::stopCalibrateSignal()
         // 当停止增益时，计算每个导联的采样点偏移量
         for (byte leadType = ltI; leadType < LeadTypeCount; ++leadType) {
             ECGLead& lead = m_leads[leadType];
-            for (byte leadGainType = lgtX1; leadGainType < LeadGainTypeCount; ++leadGainType) {
-                lead.pointOffsets[leadGainType] = lead.pointOffsetSums[leadGainType] / static_cast<int>(m_calibratedLeadPointCount);
+            for (byte leadGainType = lgtX1; leadGainType < LeadGainTypeCount; 
+				++leadGainType) {
+                lead.pointOffsets[leadGainType] = lead.pointOffsetSums[leadGainType] / 
+					static_cast<int>(m_calibratedLeadPointCount);
             }
             lead.gainType = lead.gainTypeBackup;
         }
@@ -178,19 +182,19 @@ void ECGDevice::clearCalibratingSignal()
         m_leads[leadType].resetPointOffsets();
     }
     // 清除Flash中的校准结果
-    FLASH_Unlock();
-    FLASH_ErasePage(CalibrateResultAddressInFlash);
-    FLASH_Lock();
+    HAL_FLASH_Unlock();
+    FLASH_PageErase(CalibrateResultAddressInFlash);
+    HAL_FLASH_Lock();
 }
 
 void ECGDevice::setupBuiltInFilter(BuiltInFilterType filterType, bool enabled)
 {
     switch (filterType) {
     case bftFilter0:
-        GPIO_WriteBit(GPIOB, GPIO_Pin_5, enabled ? Bit_SET : Bit_RESET);
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, enabled ? GPIO_PIN_SET : GPIO_PIN_RESET);
         break;
     case bftFilter1:
-        GPIO_WriteBit(GPIOB, GPIO_Pin_6, enabled ? Bit_SET : Bit_RESET);
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, enabled ? GPIO_PIN_SET : GPIO_PIN_RESET);
         break;
     }
 }
@@ -201,85 +205,85 @@ void ECGDevice::selectLeadType(LeadType leadType)
     case ltI:
 #if PCB_VERSION < 3
         // Pin4,5,6: 000
-        GPIO_ResetBits(GPIOA, GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6, GPIO_PIN_RESET);
 #else
         // Pin4,5,6: 111
-        GPIO_SetBits(GPIOA, GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6, GPIO_PIN_SET);
 #endif
         break;
     case ltII:
 #if PCB_VERSION < 3
         // Pin4,5,6: 100
-        GPIO_SetBits(GPIOA, GPIO_Pin_4);
-        GPIO_ResetBits(GPIOA, GPIO_Pin_5 | GPIO_Pin_6);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5 | GPIO_PIN_6, GPIO_PIN_RESET);
 #else
         // Pin4,5,6: 011
-        GPIO_ResetBits(GPIOA, GPIO_Pin_4);
-        GPIO_SetBits(GPIOA, GPIO_Pin_5 | GPIO_Pin_6);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5 | GPIO_PIN_6, GPIO_PIN_SET);
 #endif
         break;
     case ltV1:
 #if PCB_VERSION < 3
         // Pin4,5,6: 010
-        GPIO_ResetBits(GPIOA, GPIO_Pin_4 | GPIO_Pin_6);
-        GPIO_SetBits(GPIOA, GPIO_Pin_5);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4 | GPIO_PIN_6, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
 #else
         // Pin4,5,6: 101
-        GPIO_SetBits(GPIOA, GPIO_Pin_4 | GPIO_Pin_6);
-        GPIO_ResetBits(GPIOA, GPIO_Pin_5);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4 | GPIO_PIN_6, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 #endif
         break;
     case ltV2:
 #if PCB_VERSION < 3
         // Pin4,5,6: 110
-        GPIO_ResetBits(GPIOA, GPIO_Pin_6);
-        GPIO_SetBits(GPIOA, GPIO_Pin_4 | GPIO_Pin_5);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4 | GPIO_PIN_5, GPIO_PIN_SET);
 #else
         // Pin4,5,6: 001
-        GPIO_SetBits(GPIOA, GPIO_Pin_6);
-        GPIO_ResetBits(GPIOA, GPIO_Pin_4 | GPIO_Pin_5);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4 | GPIO_PIN_5, GPIO_PIN_RESET);
 #endif
         break;
     case ltV3:
 #if PCB_VERSION < 3
         // Pin4,5,6: 001
-        GPIO_ResetBits(GPIOA, GPIO_Pin_4 | GPIO_Pin_5);
-        GPIO_SetBits(GPIOA, GPIO_Pin_6);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4 | GPIO_PIN_5, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_SET);
 #else
         // Pin4,5,6: 110
-        GPIO_SetBits(GPIOA, GPIO_Pin_4 | GPIO_Pin_5);
-        GPIO_ResetBits(GPIOA, GPIO_Pin_6);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4 | GPIO_PIN_5, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET);
 #endif
         break;
     case ltV4:
 #if PCB_VERSION < 3
         // Pin4,5,6: 101
-        GPIO_ResetBits(GPIOA, GPIO_Pin_5);
-        GPIO_SetBits(GPIOA, GPIO_Pin_4 | GPIO_Pin_6);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4 | GPIO_PIN_6, GPIO_PIN_SET);
 #else
         // Pin4,5,6: 010
-        GPIO_SetBits(GPIOA, GPIO_Pin_5);
-        GPIO_ResetBits(GPIOA, GPIO_Pin_4 | GPIO_Pin_6);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4 | GPIO_PIN_6, GPIO_PIN_RESET);
 #endif
         break;
     case ltV5:
 #if PCB_VERSION < 3
         // Pin4,5,6: 011
-        GPIO_ResetBits(GPIOA, GPIO_Pin_4);
-        GPIO_SetBits(GPIOA, GPIO_Pin_5 | GPIO_Pin_6);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5 | GPIO_PIN_6, GPIO_PIN_SET);
 #else
         // Pin4,5,6: 100
-        GPIO_SetBits(GPIOA, GPIO_Pin_4);
-        GPIO_ResetBits(GPIOA, GPIO_Pin_5 | GPIO_Pin_6);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5 | GPIO_PIN_6, GPIO_PIN_RESET);
 #endif
         break;
     case ltV6:
 #if PCB_VERSION < 3
         // Pin4,5,6: 111
-        GPIO_SetBits(GPIOA, GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6, GPIO_PIN_SET);
 #else
         // Pin4,5,6: 000
-        GPIO_ResetBits(GPIOA, GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6, GPIO_PIN_RESET);
 #endif
         break;
     }
@@ -291,34 +295,34 @@ void ECGDevice::selectLeadGainType(LeadGainType leadGainType)
     case lgtX1:
 #if PCB_VERSION < 3
         // Pin0,1: 10
-        GPIO_ResetBits(GPIOB, GPIO_Pin_1);
-        GPIO_SetBits(GPIOB, GPIO_Pin_0);
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
 #else
         // Pin0,1: 01
-        GPIO_SetBits(GPIOB, GPIO_Pin_1);
-        GPIO_ResetBits(GPIOB, GPIO_Pin_0);
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
 #endif
         break;
     case lgtX2:
     case lgtX4:
 #if PCB_VERSION < 3
         // Pin0,1: 01
-        GPIO_SetBits(GPIOB, GPIO_Pin_1);
-        GPIO_ResetBits(GPIOB, GPIO_Pin_0);
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
 #else
         // Pin0,1: 10
-        GPIO_ResetBits(GPIOB, GPIO_Pin_1);
-        GPIO_SetBits(GPIOB, GPIO_Pin_0);
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
 #endif
         break;
     case lgtX0p5:
     case lgtX0p25:
 #if PCB_VERSION < 3
         // Pin0,1: 00
-        GPIO_ResetBits(GPIOB, GPIO_Pin_0 | GPIO_Pin_1);
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0 | GPIO_PIN_1, GPIO_PIN_RESET);
 #else
         // Pin0,1: 11
-        GPIO_SetBits(GPIOB, GPIO_Pin_0 | GPIO_Pin_1);
+        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0 | GPIO_PIN_1, GPIO_PIN_SET);
 #endif
         break;
     }
@@ -327,9 +331,9 @@ void ECGDevice::selectLeadGainType(LeadGainType leadGainType)
 bool ECGDevice::checkLeadAlarm()
 {
 #if PCB_VERSION < 3
-    return GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_10) == Bit_SET ? true : false;
+    return HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_10) == GPIO_PIN_SET ? true : false;
 #else
-    return GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_10) == Bit_SET ? false : true;
+    return HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_10) == GPIO_PIN_SET ? false : true;
 #endif
 }
 
@@ -338,10 +342,12 @@ void ECGDevice::applyExtraLeadGain(LeadGainType leadGainType, LeadPoint& leadPoi
     // 目前只有x4和x0.25两个增益属于额外的，需要通过软件方式来放大或者缩小
     switch (leadGainType) {
         case lgtX4:
-            leadPoint *= 2; // 假设实际硬件已经设置为x2增益，因此这里只要放大2倍即可，而不是4倍
+			// 假设实际硬件已经设置为x2增益，因此这里只要放大2倍即可，而不是4倍
+            leadPoint *= 2; 
             break;
         case lgtX0p25:
-            leadPoint /= 2; // 假设实际硬件已经设置为x0.5增益，因此这里只要缩小2倍即可，而不是4倍
+			// 假设实际硬件已经设置为x0.5增益，因此这里只要缩小2倍即可，而不是4倍
+            leadPoint /= 2; 
             break;
     }
 }
@@ -359,7 +365,8 @@ void ECGDevice::limitLeadPointRange(LeadPoint& leadPoint)
 
 LeadPoint ECGDevice::getAdcSamplingPoint()
 {
-    return ECGLead::BaseLineLeadPoint - static_cast<LeadPoint>(m_adc.getSamplingResult());
+    return ECGLead::BaseLineLeadPoint - 
+		static_cast<LeadPoint>(m_adc.getSamplingResult());
 }
 
 void ECGDevice::parseInReady()
@@ -383,7 +390,8 @@ void ECGDevice::parseInSampling()
     }
     else {
         // 获得ADC采样点，并减去其偏移量（误差）
-        m_lead->prior->point = getAdcSamplingPoint() - m_lead->prior->pointOffsets[m_lead->prior->gainType];
+        m_lead->prior->point = getAdcSamplingPoint() - 
+			m_lead->prior->pointOffsets[m_lead->prior->gainType];
         m_lead->prior->isValidPoint = true;
     }
     ENABLE_INTERRUPT();
@@ -398,7 +406,8 @@ void ECGDevice::parseInSampling()
 
     if (m_isCalibratingSignal && !m_isCalibrateSignalCompleted) {
         // 累加每一次的采样点
-        m_lead->prior->pointOffsetSums[m_lead->prior->gainType] += m_lead->prior->point;
+        m_lead->prior->pointOffsetSums[m_lead->prior->gainType] 
+			+= m_lead->prior->point;
     }
     
     if (m_lead->type == ltI) {
@@ -492,14 +501,16 @@ void ECGDevice::resetSampling()
 
 void ECGDevice::loadCalibrateResult()
 {
-    const CalibrateResult* calibrateResult = reinterpret_cast<const CalibrateResult*>(CalibrateResultAddressInFlash);
+    const CalibrateResult* calibrateResult = 
+		reinterpret_cast<const CalibrateResult*>(CalibrateResultAddressInFlash);
     // 为确保数据可靠性，需要对存放在Flash中的校准结果进行CRC32校验
     if (calibrateResult->calcCRC() == calibrateResult->crc) {
         // 装载每一个导联的采样偏移量
         for (byte leadType = ltI; leadType < LeadTypeCount; ++leadType) {
             ECGLead& lead = m_leads[leadType];
             for (byte leadGainType = lgtX1; leadGainType <= lgtX0p25; ++leadGainType) {
-                lead.pointOffsets[leadGainType] = calibrateResult->pointOffsets[leadType][leadGainType];
+                lead.pointOffsets[leadGainType] = 
+					calibrateResult->pointOffsets[leadType][leadGainType];
             }
         }
     }
@@ -511,19 +522,22 @@ void ECGDevice::saveCalibrateResult()
     CalibrateResult calibrateResult;
     for (byte leadType = ltI; leadType < LeadTypeCount; ++leadType) {
         ECGLead& lead = m_leads[leadType];
-        for (byte leadGainType = lgtX1; leadGainType < LeadGainTypeCount; ++leadGainType) {
-            calibrateResult.pointOffsets[leadType][leadGainType] = lead.pointOffsets[leadGainType];
+        for (byte leadGainType = lgtX1; leadGainType < LeadGainTypeCount; 
+			++leadGainType) {
+            calibrateResult.pointOffsets[leadType][leadGainType] = 
+				lead.pointOffsets[leadGainType];
         }
     }
     // 计算采样结果的CRC32校验码
     calibrateResult.crc = calibrateResult.calcCRC();
     // 保存采样结果到Flash
-    FLASH_Unlock();
-    FLASH_ErasePage(CalibrateResultAddressInFlash);
+    HAL_FLASH_Unlock();
+    FLASH_PageErase(CalibrateResultAddressInFlash);
     for (size_t i = 0; i < CalibrateResultPaddingSize; ++i) {
-        FLASH_ProgramWord(CalibrateResultAddressInFlash + sizeof(dword) * i, calibrateResult.padding[i]);
+        FLASH_PROC_PROGRAMWORD(FLASH_PROC_PROGRAMWORD, CalibrateResultAddressInFlash 
+			+ sizeof(dword) * i, calibrateResult.padding[i]);
     }
-    FLASH_Lock();
+    HAL_FLASH_Lock();
 }
 
 void ECGDevice::checkCalibrateCompleted()

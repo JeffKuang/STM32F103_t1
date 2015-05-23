@@ -16,7 +16,7 @@
 namespace ecg{
 
 #define One_Wire	((GPIO_TypeDef *) GPIOA_BASE)
-#define One_Wire_IO	GPIO_Pin_12
+#define One_Wire_IO	GPIO_PIN_12
 
 static unsigned long SHA_256_Initial[] = {
 	0x6a09e667,
@@ -93,13 +93,13 @@ SecureAuth SecureAuth::m_instance;
 ////////////////////////////////////////////////////////////////////////////////
 SecureAuth::SecureAuth(){
 	GPIO_InitTypeDef initTypeDef;
-	initTypeDef.GPIO_Pin = GPIO_Pin_12;
-	initTypeDef.GPIO_Speed = GPIO_Speed_50MHz;
-	initTypeDef.GPIO_Mode = GPIO_Mode_Out_OD;
-	GPIO_Init(GPIOA, &initTypeDef);
-	GPIO_WriteBit(GPIOA, GPIO_Pin_12, Bit_SET);
+	initTypeDef.Pin = GPIO_PIN_12;
+	initTypeDef.Speed = GPIO_SPEED_HIGH;
+	initTypeDef.Mode = GPIO_MODE_OUTPUT_OD;
+	HAL_GPIO_Init(GPIOA, &initTypeDef);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET);
 	mGPIOx = GPIOA;
-	mPin = GPIO_Pin_12;
+	mPin = GPIO_PIN_12;
 	m_instance = *this;
 }
 
@@ -150,17 +150,17 @@ void SecureAuth::OneWireIOInditection(bool temp)
 	GPIO_InitTypeDef GPIO_InitStructure;
 	if (temp)
 	{
-		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
-		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
-		GPIO_Init((GPIO_TypeDef*)GPIOA_BASE, &GPIO_InitStructure);
+		GPIO_InitStructure.Pin = GPIO_PIN_12;
+		GPIO_InitStructure.Speed = GPIO_SPEED_HIGH;
+		GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
+		HAL_GPIO_Init((GPIO_TypeDef*)GPIOA_BASE, &GPIO_InitStructure);
 	}
 	else
 	{
-		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
-		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
-		GPIO_Init((GPIO_TypeDef*)GPIOA_BASE, &GPIO_InitStructure);
+		GPIO_InitStructure.Pin = GPIO_PIN_12;
+		GPIO_InitStructure.Speed = GPIO_SPEED_HIGH;
+		GPIO_InitStructure.Mode = GPIO_MODE_INPUT;
+		HAL_GPIO_Init((GPIO_TypeDef*)GPIOA_BASE, &GPIO_InitStructure);
 	}
 }
 
@@ -168,11 +168,11 @@ uchar SecureAuth::ow_reset(void)
 {
 	uchar presence;
 	OneWireIOInditection(OUTPUTDATA);
-	GPIO_ResetBits(One_Wire, One_Wire_IO);
+	HAL_GPIO_WritePin(One_Wire, One_Wire_IO, GPIO_PIN_RESET);
 	// leave it low for 480s
 	Delay_Ms(60);
 	// allow line to return high
-	GPIO_SetBits(One_Wire, One_Wire_IO);
+	HAL_GPIO_WritePin(One_Wire, One_Wire_IO, GPIO_PIN_SET);
 	// wait for presence
 	Delay_Ms(8);
 
@@ -184,8 +184,8 @@ uchar SecureAuth::ow_reset(void)
 uchar SecureAuth::read_bit(void)
 {
 	uchar vamm;
-	GPIO_ResetBits(One_Wire, One_Wire_IO);
-	GPIO_SetBits(One_Wire, One_Wire_IO);
+	HAL_GPIO_WritePin(One_Wire, One_Wire_IO, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(One_Wire, One_Wire_IO, GPIO_PIN_SET);
 
 	vamm = ((One_Wire->IDR) & One_Wire_IO)? 1:0;
 	Delay_Ms(5);
@@ -194,14 +194,14 @@ uchar SecureAuth::read_bit(void)
 
 void SecureAuth::write_bit(char bitval)
 {
-	GPIO_ResetBits(One_Wire, One_Wire_IO);
+	HAL_GPIO_WritePin(One_Wire, One_Wire_IO, GPIO_PIN_RESET);
 	Delay_Ms(1);
 	if (bitval != 0)
 	{
-		GPIO_SetBits(One_Wire, One_Wire_IO);
+		HAL_GPIO_WritePin(One_Wire, One_Wire_IO, GPIO_PIN_SET);
 	}
 	Delay_Ms(12);
-	GPIO_SetBits(One_Wire, One_Wire_IO);
+	HAL_GPIO_WritePin(One_Wire, One_Wire_IO, GPIO_PIN_SET);
 }
 
 uchar SecureAuth::read_byte(void)
@@ -1475,14 +1475,14 @@ void SecureAuth::SetEEPROM(uchar* input, uchar* output)
 	input_tmpprt = input;
 
 	// write CPUID to STM32 Flash (0x0800F400) 8bytes
-	FLASH_Unlock();
-	FLASH_ErasePage(SaveCPUIDAddressInFlash);
+	HAL_FLASH_Unlock();
+	FLASH_PageErase(SaveCPUIDAddressInFlash);
 	for (i = 0; i < MaxWriteByteLen; i++)
 	{
-		FLASH_ProgramHalfWord(SaveCPUIDAddressInFlash + sizeof(uint16_t) * i, (uint16_t)(*input_tmpprt));
+		FLASH_Program_HalfWord(SaveCPUIDAddressInFlash + sizeof(uint16_t) * i, (uint16_t)(*input_tmpprt));
 		input_tmpprt++;
 	}
-	FLASH_Lock();
+	HAL_FLASH_Lock();
 
 	input_tmpprt = input;
 	output_tmpprt = output;

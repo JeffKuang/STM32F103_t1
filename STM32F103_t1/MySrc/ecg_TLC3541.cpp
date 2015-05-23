@@ -91,20 +91,20 @@ void TLC3541::handleSPI2()
 void TLC3541::select()
 {
 #if PCB_VERSION == 1
-    GPIO_SetBits(GPIOB, GPIO_Pin_12);
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
 #else
-    //GPIO_ResetBits(GPIOB, GPIO_Pin_12);
-    GPIO_SetBits(GPIOB, GPIO_Pin_12); // ÔÝÊ±ÐÞ²¹
+    //GPIO_ResetBits(GPIOB, GPIO_PIN_12);
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_SET); // ÔÝÊ±ÐÞ²¹
 #endif
 }
 
 void TLC3541::deselect()
 {
 #if PCB_VERSION == 1
-    GPIO_ResetBits(GPIOB, GPIO_Pin_12);
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
 #else
-    //GPIO_SetBits(GPIOB, GPIO_Pin_12);
-    GPIO_ResetBits(GPIOB, GPIO_Pin_12); // ÔÝÊ±ÐÞ²¹
+    //HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET); // ÔÝÊ±ÐÞ²¹
 #endif
 }
 

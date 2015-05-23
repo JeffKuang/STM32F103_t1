@@ -716,6 +716,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\Src\main.c"
+					>
+				</File>
+				<File
 					RelativePath="..\MySrc\main.cpp"
 					>
 				</File>

@@ -72,45 +72,57 @@ void Application::processCommand()
         // 下面的工作是获得该接收的数据，并解析为命令，然后执行相应的处理函数。
         void* data = NULL;
         size_t size = 0;
-        m_protocol.getReceiveData(&data, size); // data和size的值会被m_protocol.getReceiveData()函数修改
+		// data和size的值会被m_protocol.getReceiveData()函数修改
+        m_protocol.getReceiveData(&data, size); 
         if (data != NULL && size > 0) {
 #if USE_AES
             if (m_aes.decipher(data, data, size)) { // 解密data
 #endif
                 // 解密成功后，执行下面处理
-                word cmdId = *reinterpret_cast<word*>(data); // 将data解析为命令ID，因为命令ID正好位于data的前2个字节
+				// 将data解析为命令ID，因为命令ID正好位于data的前2个字节
+                word cmdId = *reinterpret_cast<word*>(data); 
                 
                 // 对于不同的命令ID，执行相应的命令处理函数
                 switch (cmdId) {
                 case ciGetVersionInfo:
-                    handleGetVersionInfoCmd(reinterpret_cast<GetVersionInfoCmd*>(data));
+                    handleGetVersionInfoCmd(
+						reinterpret_cast<GetVersionInfoCmd*>(data));
                     break;
                 case ciGetDeviceInfo:
-                    handleGetDeviceInfoCmd(reinterpret_cast<GetDeviceInfoCmd*>(data));
+                    handleGetDeviceInfoCmd(
+						reinterpret_cast<GetDeviceInfoCmd*>(data));
                     break;
                 case ciStartSampling:
-                    handleStartSamplingCmd(reinterpret_cast<StartSamplingCmd*>(data));
+                    handleStartSamplingCmd(
+						reinterpret_cast<StartSamplingCmd*>(data));
                     break;
                 case ciStopSampling:
-                    handleStopSamplingCmd(reinterpret_cast<StopSamplingCmd*>(data));
+                    handleStopSamplingCmd(
+						reinterpret_cast<StopSamplingCmd*>(data));
                     break;
                 case ciSetSignalReset:
-                    handleSetSignalResetCmd(reinterpret_cast<SetSignalResetCmd*>(data));
+                    handleSetSignalResetCmd(
+						reinterpret_cast<SetSignalResetCmd*>(data));
                     break;
                 case ciCalibrateSignal:
-                    handleCalibrateSignalCmd(reinterpret_cast<CalibrateSignalCmd*>(data));
+                    handleCalibrateSignalCmd(
+						reinterpret_cast<CalibrateSignalCmd*>(data));
                     break;
                 case ciSetLeadGainType:
-                    handleSetLeadGainTypeCmd(reinterpret_cast<SetLeadGainTypeCmd*>(data));
+                    handleSetLeadGainTypeCmd(
+						reinterpret_cast<SetLeadGainTypeCmd*>(data));
                     break;
                 case ciSetBuiltInFilter:
-                    handleSetBuiltInFilterCmd(reinterpret_cast<SetBuiltInFilterCmd*>(data));
+                    handleSetBuiltInFilterCmd(
+						reinterpret_cast<SetBuiltInFilterCmd*>(data));
                     break;
                 case ciClearCalibrateSignal:
-                    handleClearCalibrateSignalCmd(reinterpret_cast<ClearCalibrateSignalCmd*>(data));
+                    handleClearCalibrateSignalCmd(
+						reinterpret_cast<ClearCalibrateSignalCmd*>(data));
                     break;
 				case  ciAuthenticationDevice:
-					handleAuthenticationDeviceCmd(reinterpret_cast<AuthenticationDeviceCmd*>(data));
+					handleAuthenticationDeviceCmd(
+						reinterpret_cast<AuthenticationDeviceCmd*>(data));
 					break;
 				case ciLoadSecret:
 					handleLoadSecretCmd(reinterpret_cast<LoadSecretCmd*>(data));
@@ -138,19 +150,23 @@ void Application::processSampling()
 {
     if (m_device.isSamplingPeriodCompleted()) {
         // 一个采样周期完成后，执行下面处理
-        // 注意：所谓采样周期完成，是指一组导联（I、II、V1~V6）的相关数据已经采样完成，并可以完全读取
-        m_device.clearSamplingPeriodCompletedFlag(); // 一定要清除采样周期完成标记，以便能再次在正确的时机进入此处代码片断
+        // 注意：所谓采样周期完成，是指一组导联（I、II、V1~V6）的相关数据已经采样完成，
+		// 并可以完全读取
+		// 一定要清除采样周期完成标记，以便能再次在正确的时机进入此处代码片断
+        m_device.clearSamplingPeriodCompletedFlag(); 
         
         // 以下是装配采样结果命令
         m_samplingResultCmd.id = ciSamplingResult;
-        m_samplingResultCmd.params.index = ++m_lastSamplingResultIndex; // 采样索引Index以自增方式工作
+		// 采样索引Index以自增方式工作
+        m_samplingResultCmd.params.index = ++m_lastSamplingResultIndex; 
         bool isValidSampling = true; // 表示完整的一组导联的采样数据是可用的
         DISABLE_INTERRUPT();
         for (byte leadType = ltI; leadType < LeadTypeCount; ++leadType) {
             ECGLead& lead = m_device.getLead(static_cast<LeadType>(leadType));
             if (lead.lastIsValidPoint) {
                 // 对于可用的采样数据，用它们来装配采样结果命令
-                SamplingResultParams::Lead& cmdLead = m_samplingResultCmd.params.leads[leadType];
+                SamplingResultParams::Lead& cmdLead = 
+					m_samplingResultCmd.params.leads[leadType];
                 cmdLead.point = lead.getUnsignedLastPoint();
                 cmdLead.gainType = lead.lastGainType;
                 cmdLead.alarm = lead.lastAlarm;
@@ -203,7 +219,8 @@ void Application::processCalibrateSignalCompleted()
 {
     if (m_device.isCalibratingSignal() && m_device.isCalibrateSignalCompleted()) {
         // 当设备正在校准信号，并且校准信号完成时，执行下面处理
-        m_device.stopCalibrateSignal(); // 主动停止校准信号，其内部会将校准结果保存到Flash中
+		// 主动停止校准信号，其内部会将校准结果保存到Flash中
+        m_device.stopCalibrateSignal(); 
         // 装配并发送校准信号完成命令
         m_calibrateSignalCompletedCmd.id = ciCalibrateSignalCompleted;
         sendCommand(m_calibrateSignalCompletedCmd, true);
@@ -268,7 +285,8 @@ void Application::handleSetLeadGainTypeCmd(SetLeadGainTypeCmd* cmd)
     if (!m_device.isCalibratingSignal() &&
         isLeadType(cmd->params.leadType) &&
         isLeadGainType(cmd->params.leadGainType)) {
-        m_device.getLead(static_cast<LeadType>(cmd->params.leadType)).gainType = static_cast<LeadGainType>(cmd->params.leadGainType);
+        m_device.getLead(static_cast<LeadType>(cmd->params.leadType)).gainType 
+			= static_cast<LeadGainType>(cmd->params.leadGainType);
     }
     ENABLE_INTERRUPT();
 }
@@ -277,7 +295,9 @@ void Application::handleSetBuiltInFilterCmd(SetBuiltInFilterCmd* cmd)
 {
     DISABLE_INTERRUPT();
     if (isBuiltInFilterType(cmd->params.filterType)) {
-        m_device.setupBuiltInFilter(static_cast<BuiltInFilterType>(cmd->params.filterType), cmd->params.enabled);
+        m_device.setupBuiltInFilter(
+			static_cast<BuiltInFilterType>(cmd->params.filterType), 
+			cmd->params.enabled);
     }
     ENABLE_INTERRUPT();
 }
@@ -292,9 +312,9 @@ void Application::handleClearCalibrateSignalCmd(ClearCalibrateSignalCmd* cmd)
 void Application::handleKillFirmwareCmd(KillFirmwareCmd* cmd)
 {
     DISABLE_INTERRUPT();
-    FLASH_Unlock();
-    FLASH_ErasePage(ValidFirmwareTagAddressInFlash);
-    FLASH_Lock();
+    HAL_FLASH_Unlock();
+    FLASH_PageErase(ValidFirmwareTagAddressInFlash);
+    HAL_FLASH_Lock();
     NVIC_SystemReset();
     ENABLE_INTERRUPT();
 }
