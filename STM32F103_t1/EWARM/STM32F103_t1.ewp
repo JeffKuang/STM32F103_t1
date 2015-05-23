@@ -43,7 +43,7 @@
         </option>
         <option>
           <name>Input description</name>
-          <state>Full formatting.</state>
+          <state></state>
         </option>
         <option>
           <name>Output variant</name>
@@ -52,7 +52,7 @@
         </option>
         <option>
           <name>Output description</name>
-          <state>Full formatting.</state>
+          <state></state>
         </option>
         <option>
           <name>GOutputBinary</name>
@@ -143,7 +143,7 @@
         <option>
           <name>GBECoreSlave</name>
           <version>20</version>
-          <state>38</state>
+          <state>39</state>
         </option>
         <option>
           <name>OGUseCmsis</name>
@@ -361,7 +361,7 @@
         </option>
         <option>
           <name>IccLang</name>
-          <state>2</state>
+          <state>0</state>
         </option>
         <option>
           <name>IccCDialect</name>
@@ -586,15 +586,15 @@
         <option>
           <name>OOCOutputFormat</name>
           <version>2</version>
-          <state>2</state>
+          <state>0</state>
         </option>
         <option>
           <name>OCOutputOverride</name>
-          <state>1</state>
+          <state>0</state>
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>STM32F103_t1.bin</state>
+          <state>Project.srec</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>
@@ -602,7 +602,7 @@
         </option>
         <option>
           <name>OOCObjCopyEnable</name>
-          <state>1</state>
+          <state>0</state>
         </option>
       </data>
     </settings>
@@ -712,7 +712,7 @@
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state>$TOOLKIT_DIR$\config\linker\ST\stm32f103x8.icf</state>
+          <state></state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>
@@ -955,7 +955,7 @@
     <group>
       <name>User</name>
       <file>
-        <name>$PROJ_DIR$\..\Src\main.cpp</name>
+        <name>$PROJ_DIR$\..\Src\main.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\Src\stm32f1xx_hal_msp.c</name>
@@ -1004,6 +1004,15 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_spi.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_spi_ex.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.c</name>
       </file>
     </group>
   </group>
