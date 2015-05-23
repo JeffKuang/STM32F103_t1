@@ -1,0 +1,10 @@
+*.temp
+settings/
+STM32F103_t1 Configuration/
+*.dep
+
+*.ncb
+*.suo
+*.user
+DSP_Lib/
+
