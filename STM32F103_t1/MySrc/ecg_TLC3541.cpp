@@ -41,7 +41,8 @@ void TLC3541::reset()
         deselect();
         delayN10us(10);
         select();
-        transmit(0); // 按照TLC3541的时序要求，发送8个下降时钟沿，以便其内部完成初始化工作
+        // 按照TLC3541的时序要求，发送8个下降时钟沿，以便其内部完成初始化工作
+        transmit(0); 
         deselect();
         delayN10us(10);
         // 开始第一次采样，正常情况下，采样结果应该等于ResetSamplingValue

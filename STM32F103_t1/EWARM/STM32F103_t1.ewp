@@ -956,6 +956,9 @@
     <group>
       <name>User</name>
       <file>
+        <name>$PROJ_DIR$\..\Src\dma.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\MySrc\ecg_Application.cpp</name>
       </file>
       <file>
@@ -980,13 +983,22 @@
         <name>$PROJ_DIR$\..\MySrc\ecg_TLC3541.cpp</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\Src\gpio.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\MySrc\main.cpp</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\Src\spi.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\Src\stm32f1xx_hal_msp.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\Src\stm32f1xx_it.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\Src\usart.c</name>
       </file>
     </group>
   </group>

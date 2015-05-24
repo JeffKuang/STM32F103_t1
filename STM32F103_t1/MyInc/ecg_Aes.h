@@ -35,8 +35,11 @@ class Aes : public NonCopyable
 {
 public:
     enum {
-        KeyByteCount = Nk * 4, /**< 密码字节数，分为三种：16、24以及32字节，分别对应128，192以及256位 */
-        BlockByteCount = 16, /**< 分组字节数，固定16字节，即128位 */
+        /**< 密码字节数，分为三种：16、24以及32字节，
+             分别对应128，192以及256位 */
+        KeyByteCount = Nk * 4, 
+        /**< 分组字节数，固定16字节，即128位 */
+        BlockByteCount = 16, 
     };
 
 #pragma pack(push, 1)
@@ -150,7 +153,8 @@ public:
     bool encipher(const void* plainBuffer, void* cipherBuffer, size_t size)
     {
         if (size > 0 && (size % BlockByteCount) == 0) {
-            encipher(reinterpret_cast<const Block*>(plainBuffer), reinterpret_cast<Block*>(cipherBuffer), size / BlockByteCount);
+            encipher(reinterpret_cast<const Block*>(plainBuffer), 
+                reinterpret_cast<Block*>(cipherBuffer), size / BlockByteCount);
             return true;
         }
         else {
@@ -241,7 +245,8 @@ public:
     bool decipher(const void* cipherBuffer, void* plainBuffer, size_t size)
     {
         if (size > 0 && (size % BlockByteCount) == 0) {
-            decipher(reinterpret_cast<const Block*>(cipherBuffer), reinterpret_cast<Block*>(plainBuffer), size / BlockByteCount);
+            decipher(reinterpret_cast<const Block*>(cipherBuffer), 
+                reinterpret_cast<Block*>(plainBuffer), size / BlockByteCount);
             return true;
         }
         else {
@@ -348,28 +353,65 @@ private:
         m_tempStateMatirixInWords[3] = m_stateMatrixInWords[3];
 
         // 第0列
-        m_stateMatrix[0][0] = m_gfMultBy02[m_tempStateMatrix[0][0]] ^ m_gfMultBy03[m_tempStateMatrix[1][0]] ^ m_tempStateMatrix[2][0] ^ m_tempStateMatrix[3][0];
-        m_stateMatrix[1][0] = m_tempStateMatrix[0][0] ^ m_gfMultBy02[m_tempStateMatrix[1][0]] ^ m_gfMultBy03[m_tempStateMatrix[2][0]] ^ m_tempStateMatrix[3][0];
-        m_stateMatrix[2][0] = m_tempStateMatrix[0][0] ^ m_tempStateMatrix[1][0] ^ m_gfMultBy02[m_tempStateMatrix[2][0]] ^ m_gfMultBy03[m_tempStateMatrix[3][0]];
-        m_stateMatrix[3][0] = m_gfMultBy03[m_tempStateMatrix[0][0]] ^ m_tempStateMatrix[1][0] ^ m_tempStateMatrix[2][0] ^ m_gfMultBy02[m_tempStateMatrix[3][0]];
+        m_stateMatrix[0][0] = m_gfMultBy02[m_tempStateMatrix[0][0]] 
+                                ^ m_gfMultBy03[m_tempStateMatrix[1][0]] 
+                                ^ m_tempStateMatrix[2][0] 
+                                ^ m_tempStateMatrix[3][0];
+        m_stateMatrix[1][0] = m_tempStateMatrix[0][0] 
+                                ^ m_gfMultBy02[m_tempStateMatrix[1][0]] 
+                                ^ m_gfMultBy03[m_tempStateMatrix[2][0]] 
+                                ^ m_tempStateMatrix[3][0];
+        m_stateMatrix[2][0] = m_tempStateMatrix[0][0] ^ m_tempStateMatrix[1][0] 
+                                ^ m_gfMultBy02[m_tempStateMatrix[2][0]] 
+                                ^ m_gfMultBy03[m_tempStateMatrix[3][0]];
+        m_stateMatrix[3][0] = m_gfMultBy03[m_tempStateMatrix[0][0]] 
+                                ^ m_tempStateMatrix[1][0] ^ m_tempStateMatrix[2][0] 
+                                ^ m_gfMultBy02[m_tempStateMatrix[3][0]];
 
         // 第1列
-        m_stateMatrix[0][1] = m_gfMultBy02[m_tempStateMatrix[0][1]] ^ m_gfMultBy03[m_tempStateMatrix[1][1]] ^ m_tempStateMatrix[2][1] ^ m_tempStateMatrix[3][1];
-        m_stateMatrix[1][1] = m_tempStateMatrix[0][1] ^ m_gfMultBy02[m_tempStateMatrix[1][1]] ^ m_gfMultBy03[m_tempStateMatrix[2][1]] ^ m_tempStateMatrix[3][1];
-        m_stateMatrix[2][1] = m_tempStateMatrix[0][1] ^ m_tempStateMatrix[1][1] ^ m_gfMultBy02[m_tempStateMatrix[2][1]] ^ m_gfMultBy03[m_tempStateMatrix[3][1]];
-        m_stateMatrix[3][1] = m_gfMultBy03[m_tempStateMatrix[0][1]] ^ m_tempStateMatrix[1][1] ^ m_tempStateMatrix[2][1] ^ m_gfMultBy02[m_tempStateMatrix[3][1]];
+        m_stateMatrix[0][1] = m_gfMultBy02[m_tempStateMatrix[0][1]] 
+                                ^ m_gfMultBy03[m_tempStateMatrix[1][1]] 
+                                ^ m_tempStateMatrix[2][1] ^ m_tempStateMatrix[3][1];
+        m_stateMatrix[1][1] = m_tempStateMatrix[0][1] 
+                                ^ m_gfMultBy02[m_tempStateMatrix[1][1]] 
+                                ^ m_gfMultBy03[m_tempStateMatrix[2][1]] 
+                                ^ m_tempStateMatrix[3][1];
+        m_stateMatrix[2][1] = m_tempStateMatrix[0][1] ^ m_tempStateMatrix[1][1] 
+                                ^ m_gfMultBy02[m_tempStateMatrix[2][1]] 
+                                ^ m_gfMultBy03[m_tempStateMatrix[3][1]];
+        m_stateMatrix[3][1] = m_gfMultBy03[m_tempStateMatrix[0][1]] 
+                                ^ m_tempStateMatrix[1][1] ^ m_tempStateMatrix[2][1] 
+                                ^ m_gfMultBy02[m_tempStateMatrix[3][1]];
 
         // 第2列
-        m_stateMatrix[0][2] = m_gfMultBy02[m_tempStateMatrix[0][2]] ^ m_gfMultBy03[m_tempStateMatrix[1][2]] ^ m_tempStateMatrix[2][2] ^ m_tempStateMatrix[3][2];
-        m_stateMatrix[1][2] = m_tempStateMatrix[0][2] ^ m_gfMultBy02[m_tempStateMatrix[1][2]] ^ m_gfMultBy03[m_tempStateMatrix[2][2]] ^ m_tempStateMatrix[3][2];
-        m_stateMatrix[2][2] = m_tempStateMatrix[0][2] ^ m_tempStateMatrix[1][2] ^ m_gfMultBy02[m_tempStateMatrix[2][2]] ^ m_gfMultBy03[m_tempStateMatrix[3][2]];
-        m_stateMatrix[3][2] = m_gfMultBy03[m_tempStateMatrix[0][2]] ^ m_tempStateMatrix[1][2] ^ m_tempStateMatrix[2][2] ^ m_gfMultBy02[m_tempStateMatrix[3][2]];
+        m_stateMatrix[0][2] = m_gfMultBy02[m_tempStateMatrix[0][2]] 
+                                ^ m_gfMultBy03[m_tempStateMatrix[1][2]] 
+                                ^ m_tempStateMatrix[2][2] ^ m_tempStateMatrix[3][2];
+        m_stateMatrix[1][2] = m_tempStateMatrix[0][2] 
+                                ^ m_gfMultBy02[m_tempStateMatrix[1][2]] 
+                                ^ m_gfMultBy03[m_tempStateMatrix[2][2]] 
+                                ^ m_tempStateMatrix[3][2];
+        m_stateMatrix[2][2] = m_tempStateMatrix[0][2] ^ m_tempStateMatrix[1][2] 
+                                ^ m_gfMultBy02[m_tempStateMatrix[2][2]] 
+                                ^ m_gfMultBy03[m_tempStateMatrix[3][2]];
+        m_stateMatrix[3][2] = m_gfMultBy03[m_tempStateMatrix[0][2]] 
+                                ^ m_tempStateMatrix[1][2] ^ m_tempStateMatrix[2][2] 
+                                ^ m_gfMultBy02[m_tempStateMatrix[3][2]];
 
         // 第3列
-        m_stateMatrix[0][3] = m_gfMultBy02[m_tempStateMatrix[0][3]] ^ m_gfMultBy03[m_tempStateMatrix[1][3]] ^ m_tempStateMatrix[2][3] ^ m_tempStateMatrix[3][3];
-        m_stateMatrix[1][3] = m_tempStateMatrix[0][3] ^ m_gfMultBy02[m_tempStateMatrix[1][3]] ^ m_gfMultBy03[m_tempStateMatrix[2][3]] ^ m_tempStateMatrix[3][3];
-        m_stateMatrix[2][3] = m_tempStateMatrix[0][3] ^ m_tempStateMatrix[1][3] ^ m_gfMultBy02[m_tempStateMatrix[2][3]] ^ m_gfMultBy03[m_tempStateMatrix[3][3]];
-        m_stateMatrix[3][3] = m_gfMultBy03[m_tempStateMatrix[0][3]] ^ m_tempStateMatrix[1][3] ^ m_tempStateMatrix[2][3] ^ m_gfMultBy02[m_tempStateMatrix[3][3]];
+        m_stateMatrix[0][3] = m_gfMultBy02[m_tempStateMatrix[0][3]] 
+                                ^ m_gfMultBy03[m_tempStateMatrix[1][3]] 
+                                ^ m_tempStateMatrix[2][3] ^ m_tempStateMatrix[3][3];
+        m_stateMatrix[1][3] = m_tempStateMatrix[0][3] 
+                                ^ m_gfMultBy02[m_tempStateMatrix[1][3]] 
+                                ^ m_gfMultBy03[m_tempStateMatrix[2][3]] 
+                                ^ m_tempStateMatrix[3][3];
+        m_stateMatrix[2][3] = m_tempStateMatrix[0][3] ^ m_tempStateMatrix[1][3] 
+                                ^ m_gfMultBy02[m_tempStateMatrix[2][3]] 
+                                ^ m_gfMultBy03[m_tempStateMatrix[3][3]];
+        m_stateMatrix[3][3] = m_gfMultBy03[m_tempStateMatrix[0][3]] 
+                                ^ m_tempStateMatrix[1][3] ^ m_tempStateMatrix[2][3] 
+                                ^ m_gfMultBy02[m_tempStateMatrix[3][3]];
     }
 
     void inverseMixColumns()
@@ -380,28 +422,76 @@ private:
         m_tempStateMatirixInWords[3] = m_stateMatrixInWords[3];
 
         // 第0列
-        m_stateMatrix[0][0] = m_gfMultBy0e[m_tempStateMatrix[0][0]] ^ m_gfMultBy0b[m_tempStateMatrix[1][0]] ^ m_gfMultBy0d[m_tempStateMatrix[2][0]] ^ m_gfMultBy09[m_tempStateMatrix[3][0]];
-        m_stateMatrix[1][0] = m_gfMultBy09[m_tempStateMatrix[0][0]] ^ m_gfMultBy0e[m_tempStateMatrix[1][0]] ^ m_gfMultBy0b[m_tempStateMatrix[2][0]] ^ m_gfMultBy0d[m_tempStateMatrix[3][0]];
-        m_stateMatrix[2][0] = m_gfMultBy0d[m_tempStateMatrix[0][0]] ^ m_gfMultBy09[m_tempStateMatrix[1][0]] ^ m_gfMultBy0e[m_tempStateMatrix[2][0]] ^ m_gfMultBy0b[m_tempStateMatrix[3][0]];
-        m_stateMatrix[3][0] = m_gfMultBy0b[m_tempStateMatrix[0][0]] ^ m_gfMultBy0d[m_tempStateMatrix[1][0]] ^ m_gfMultBy09[m_tempStateMatrix[2][0]] ^ m_gfMultBy0e[m_tempStateMatrix[3][0]];
+        m_stateMatrix[0][0] = m_gfMultBy0e[m_tempStateMatrix[0][0]] 
+                                ^ m_gfMultBy0b[m_tempStateMatrix[1][0]] 
+                                ^ m_gfMultBy0d[m_tempStateMatrix[2][0]] 
+                                ^ m_gfMultBy09[m_tempStateMatrix[3][0]];
+        m_stateMatrix[1][0] = m_gfMultBy09[m_tempStateMatrix[0][0]] 
+                                ^ m_gfMultBy0e[m_tempStateMatrix[1][0]] 
+                                ^ m_gfMultBy0b[m_tempStateMatrix[2][0]] 
+                                ^ m_gfMultBy0d[m_tempStateMatrix[3][0]];
+        m_stateMatrix[2][0] = m_gfMultBy0d[m_tempStateMatrix[0][0]] 
+                                ^ m_gfMultBy09[m_tempStateMatrix[1][0]] 
+                                ^ m_gfMultBy0e[m_tempStateMatrix[2][0]] 
+                                ^ m_gfMultBy0b[m_tempStateMatrix[3][0]];
+        m_stateMatrix[3][0] = m_gfMultBy0b[m_tempStateMatrix[0][0]] 
+                                ^ m_gfMultBy0d[m_tempStateMatrix[1][0]] 
+                                ^ m_gfMultBy09[m_tempStateMatrix[2][0]] 
+                                ^ m_gfMultBy0e[m_tempStateMatrix[3][0]];
 
         // 第0列
-        m_stateMatrix[0][1] = m_gfMultBy0e[m_tempStateMatrix[0][1]] ^ m_gfMultBy0b[m_tempStateMatrix[1][1]] ^ m_gfMultBy0d[m_tempStateMatrix[2][1]] ^ m_gfMultBy09[m_tempStateMatrix[3][1]];
-        m_stateMatrix[1][1] = m_gfMultBy09[m_tempStateMatrix[0][1]] ^ m_gfMultBy0e[m_tempStateMatrix[1][1]] ^ m_gfMultBy0b[m_tempStateMatrix[2][1]] ^ m_gfMultBy0d[m_tempStateMatrix[3][1]];
-        m_stateMatrix[2][1] = m_gfMultBy0d[m_tempStateMatrix[0][1]] ^ m_gfMultBy09[m_tempStateMatrix[1][1]] ^ m_gfMultBy0e[m_tempStateMatrix[2][1]] ^ m_gfMultBy0b[m_tempStateMatrix[3][1]];
-        m_stateMatrix[3][1] = m_gfMultBy0b[m_tempStateMatrix[0][1]] ^ m_gfMultBy0d[m_tempStateMatrix[1][1]] ^ m_gfMultBy09[m_tempStateMatrix[2][1]] ^ m_gfMultBy0e[m_tempStateMatrix[3][1]];
+        m_stateMatrix[0][1] = m_gfMultBy0e[m_tempStateMatrix[0][1]] 
+                                ^ m_gfMultBy0b[m_tempStateMatrix[1][1]] 
+                                ^ m_gfMultBy0d[m_tempStateMatrix[2][1]] 
+                                ^ m_gfMultBy09[m_tempStateMatrix[3][1]];
+        m_stateMatrix[1][1] = m_gfMultBy09[m_tempStateMatrix[0][1]] 
+                                ^ m_gfMultBy0e[m_tempStateMatrix[1][1]] 
+                                ^ m_gfMultBy0b[m_tempStateMatrix[2][1]] 
+                                ^ m_gfMultBy0d[m_tempStateMatrix[3][1]];
+        m_stateMatrix[2][1] = m_gfMultBy0d[m_tempStateMatrix[0][1]] 
+                                ^ m_gfMultBy09[m_tempStateMatrix[1][1]] 
+                                ^ m_gfMultBy0e[m_tempStateMatrix[2][1]] 
+                                ^ m_gfMultBy0b[m_tempStateMatrix[3][1]];
+        m_stateMatrix[3][1] = m_gfMultBy0b[m_tempStateMatrix[0][1]] 
+                                ^ m_gfMultBy0d[m_tempStateMatrix[1][1]] 
+                                ^ m_gfMultBy09[m_tempStateMatrix[2][1]] 
+                                ^ m_gfMultBy0e[m_tempStateMatrix[3][1]];
 
         // 第0列
-        m_stateMatrix[0][2] = m_gfMultBy0e[m_tempStateMatrix[0][2]] ^ m_gfMultBy0b[m_tempStateMatrix[1][2]] ^ m_gfMultBy0d[m_tempStateMatrix[2][2]] ^ m_gfMultBy09[m_tempStateMatrix[3][2]];
-        m_stateMatrix[1][2] = m_gfMultBy09[m_tempStateMatrix[0][2]] ^ m_gfMultBy0e[m_tempStateMatrix[1][2]] ^ m_gfMultBy0b[m_tempStateMatrix[2][2]] ^ m_gfMultBy0d[m_tempStateMatrix[3][2]];
-        m_stateMatrix[2][2] = m_gfMultBy0d[m_tempStateMatrix[0][2]] ^ m_gfMultBy09[m_tempStateMatrix[1][2]] ^ m_gfMultBy0e[m_tempStateMatrix[2][2]] ^ m_gfMultBy0b[m_tempStateMatrix[3][2]];
-        m_stateMatrix[3][2] = m_gfMultBy0b[m_tempStateMatrix[0][2]] ^ m_gfMultBy0d[m_tempStateMatrix[1][2]] ^ m_gfMultBy09[m_tempStateMatrix[2][2]] ^ m_gfMultBy0e[m_tempStateMatrix[3][2]];
+        m_stateMatrix[0][2] = m_gfMultBy0e[m_tempStateMatrix[0][2]] 
+                                ^ m_gfMultBy0b[m_tempStateMatrix[1][2]] 
+                                ^ m_gfMultBy0d[m_tempStateMatrix[2][2]] 
+                                ^ m_gfMultBy09[m_tempStateMatrix[3][2]];
+        m_stateMatrix[1][2] = m_gfMultBy09[m_tempStateMatrix[0][2]] 
+                                ^ m_gfMultBy0e[m_tempStateMatrix[1][2]] 
+                                ^ m_gfMultBy0b[m_tempStateMatrix[2][2]] 
+                                ^ m_gfMultBy0d[m_tempStateMatrix[3][2]];
+        m_stateMatrix[2][2] = m_gfMultBy0d[m_tempStateMatrix[0][2]] 
+                                ^ m_gfMultBy09[m_tempStateMatrix[1][2]] 
+                                ^ m_gfMultBy0e[m_tempStateMatrix[2][2]] 
+                                ^ m_gfMultBy0b[m_tempStateMatrix[3][2]];
+        m_stateMatrix[3][2] = m_gfMultBy0b[m_tempStateMatrix[0][2]] 
+                                ^ m_gfMultBy0d[m_tempStateMatrix[1][2]] 
+                                ^ m_gfMultBy09[m_tempStateMatrix[2][2]] 
+                                ^ m_gfMultBy0e[m_tempStateMatrix[3][2]];
 
         // 第0列
-        m_stateMatrix[0][3] = m_gfMultBy0e[m_tempStateMatrix[0][3]] ^ m_gfMultBy0b[m_tempStateMatrix[1][3]] ^ m_gfMultBy0d[m_tempStateMatrix[2][3]] ^ m_gfMultBy09[m_tempStateMatrix[3][3]];
-        m_stateMatrix[1][3] = m_gfMultBy09[m_tempStateMatrix[0][3]] ^ m_gfMultBy0e[m_tempStateMatrix[1][3]] ^ m_gfMultBy0b[m_tempStateMatrix[2][3]] ^ m_gfMultBy0d[m_tempStateMatrix[3][3]];
-        m_stateMatrix[2][3] = m_gfMultBy0d[m_tempStateMatrix[0][3]] ^ m_gfMultBy09[m_tempStateMatrix[1][3]] ^ m_gfMultBy0e[m_tempStateMatrix[2][3]] ^ m_gfMultBy0b[m_tempStateMatrix[3][3]];
-        m_stateMatrix[3][3] = m_gfMultBy0b[m_tempStateMatrix[0][3]] ^ m_gfMultBy0d[m_tempStateMatrix[1][3]] ^ m_gfMultBy09[m_tempStateMatrix[2][3]] ^ m_gfMultBy0e[m_tempStateMatrix[3][3]];
+        m_stateMatrix[0][3] = m_gfMultBy0e[m_tempStateMatrix[0][3]] 
+                                ^ m_gfMultBy0b[m_tempStateMatrix[1][3]] 
+                                ^ m_gfMultBy0d[m_tempStateMatrix[2][3]] 
+                                ^ m_gfMultBy09[m_tempStateMatrix[3][3]];
+        m_stateMatrix[1][3] = m_gfMultBy09[m_tempStateMatrix[0][3]] 
+                                ^ m_gfMultBy0e[m_tempStateMatrix[1][3]] 
+                                ^ m_gfMultBy0b[m_tempStateMatrix[2][3]] 
+                                ^ m_gfMultBy0d[m_tempStateMatrix[3][3]];
+        m_stateMatrix[2][3] = m_gfMultBy0d[m_tempStateMatrix[0][3]] 
+                                ^ m_gfMultBy09[m_tempStateMatrix[1][3]] 
+                                ^ m_gfMultBy0e[m_tempStateMatrix[2][3]] 
+                                ^ m_gfMultBy0b[m_tempStateMatrix[3][3]];
+        m_stateMatrix[3][3] = m_gfMultBy0b[m_tempStateMatrix[0][3]] 
+                                ^ m_gfMultBy0d[m_tempStateMatrix[1][3]] 
+                                ^ m_gfMultBy09[m_tempStateMatrix[2][3]] 
+                                ^ m_gfMultBy0e[m_tempStateMatrix[3][3]];
     }
 
     void rotateLeft(dword& data, byte n)
@@ -431,17 +521,20 @@ private:
 
     byte gfMultBy0b(byte data)
     {
-        return gfMultBy02(gfMultBy02(gfMultBy02(data))) ^ gfMultBy02(data) ^ data;
+        return gfMultBy02(gfMultBy02(gfMultBy02(data))) ^ 
+            gfMultBy02(data) ^ data;
     }
 
     byte gfMultBy0d(byte data)
     {
-        return gfMultBy02(gfMultBy02(gfMultBy02(data))) ^ gfMultBy02(gfMultBy02(data)) ^ data;
+        return gfMultBy02(gfMultBy02(gfMultBy02(data))) ^ 
+            gfMultBy02(gfMultBy02(data)) ^ data;
     }
 
     byte gfMultBy0e(byte data)
     {
-        return gfMultBy02(gfMultBy02(gfMultBy02(data))) ^ gfMultBy02(gfMultBy02(data)) ^ gfMultBy02(data);
+        return gfMultBy02(gfMultBy02(gfMultBy02(data))) ^ 
+            gfMultBy02(gfMultBy02(data)) ^ gfMultBy02(data);
     }
 
     void initGfMultTable()

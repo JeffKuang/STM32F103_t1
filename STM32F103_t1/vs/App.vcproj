@@ -716,11 +716,67 @@
 					>
 				</File>
 				<File
-					RelativePath="..\Src\main.c"
+					RelativePath="..\MySrc\main.cpp"
+					>
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="STM32CubeMx"
+			>
+			<Filter
+				Name="Header Files"
+				>
+				<File
+					RelativePath="..\Inc\dma.h"
 					>
 				</File>
 				<File
-					RelativePath="..\MySrc\main.cpp"
+					RelativePath="..\Inc\gpio.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Inc\spi.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Inc\stm32f1xx_hal_conf.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Inc\stm32f1xx_it.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Inc\usart.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Source Files"
+				>
+				<File
+					RelativePath="..\Src\dma.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Src\gpio.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Src\spi.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Src\stm32f1xx_hal_msp.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Src\stm32f1xx_it.c"
+					>
+				</File>
+				<File
+					RelativePath="..\Src\usart.c"
 					>
 				</File>
 			</Filter>

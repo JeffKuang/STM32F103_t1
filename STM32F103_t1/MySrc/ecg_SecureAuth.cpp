@@ -30,16 +30,26 @@ static unsigned long SHA_256_Initial[] = {
 };
 
 static unsigned long SHA_CONSTANTS[] =  {
-	0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
-	0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
-	0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
-	0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
-	0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
-	0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
-	0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
-	0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2,
-	0xca273ece, 0xd186b8c7, 0xeada7dd6, 0xf57d4f7f, 0x06f067aa, 0x0a637dc5, 0x113f9804, 0x1b710b35,
-	0x28db77f5, 0x32caab7b, 0x3c9ebe0a, 0x431d67c4, 0x4cc5d4be, 0x597f299c, 0x5fcb6fab, 0x6c44198c
+	0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 
+    0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+	0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 
+    0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+	0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 
+    0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+	0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 
+    0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+	0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 
+    0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+	0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 
+    0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+	0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 
+    0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+	0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 
+    0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2,
+	0xca273ece, 0xd186b8c7, 0xeada7dd6, 0xf57d4f7f, 
+    0x06f067aa, 0x0a637dc5, 0x113f9804, 0x1b710b35,
+	0x28db77f5, 0x32caab7b, 0x3c9ebe0a, 0x431d67c4, 
+    0x4cc5d4be, 0x597f299c, 0x5fcb6fab, 0x6c44198c
 };
 
 static uchar dscrc_table[] = {
@@ -85,7 +95,9 @@ uchar Secret_256bit[32]={
 	0x23,0x32,0x23,0x32,0x23,0x32,0x23,0x32  
 };
 
-static short oddparity[16] = { 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0 };
+static short oddparity[16] = { 
+    0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0 
+};
 static uchar SECRET[32];
 
 
@@ -329,24 +341,32 @@ uchar SecureAuth::ReadWriteScratchpad(bool ReadMode, uchar* Buffer)
 	return 0xAA;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 /*
-The Compute and Read Page MAC command is used to authenticate the DS28E15 to the master. 
-The master computes the MAC from the same data and the expected secret. 
-If both MACs are identical, the device is confirmed authentic
-within the application.
+The Compute and Read Page MAC command is used to 
+authenticate the DS28E15 to the master. 
+The master computes the MAC from the same data 
+and the expected secret. 
+If both MACs are identical, the device is confirmed 
+authentic within the application.
 // Input parameter: 
-   1.bool Anonymous_Mode: specify whether the device’s ROM ID is used for the MAC computation.
-                          If anonymous mode , replacing the ROM ID with FFh Bytes when MAC computation
-   2.unsigned char PageNum:specifies the memory page that is to be used for the MAC computation.
-                           Valid memory page numbers are 0 (page 0) and 1 (page 1).
-   3.unsigned char *MAC_Value: receiving data buffer for 32 Bytes Computation MAC values
+   1.bool Anonymous_Mode: specify whether the device’s 
+            ROM ID is used for the MAC computation.
+            If anonymous mode , replacing the ROM ID 
+            with FFh Bytes when MAC computation
+   2.unsigned char PageNum:specifies the memory page 
+            that is to be used for the MAC computation.
+            Valid memory page numbers are 0 (page 0) 
+            and 1 (page 1).
+   3.unsigned char *MAC_Value: receiving data buffer 
+            for 32 Bytes Computation MAC values
                      
 // Returns: AAh = success
             FFh = CRC Error
             
 */
-uchar SecureAuth::ComputeAndReadPageMAC(bool Anonymous_Mode, uchar PageNum, uchar* MAC_Value)
+uchar SecureAuth::ComputeAndReadPageMAC(bool Anonymous_Mode, 
+                                        uchar PageNum, uchar* MAC_Value)
 {
 	uchar cnt = 0, i, outcome;
 //	memset(pbuf, 0x0, 20);
@@ -404,14 +424,19 @@ uchar SecureAuth::ComputeAndReadPageMAC(bool Anonymous_Mode, uchar PageNum, ucha
 	return outcome;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------
-/*Reading  DS28E15 EEPROM Data From Specified starting Segment  to last Segment in Specified Page.
-The Read Memory command is used to read the user memory. The page number and segment number specify where
-the reading begins.After the last byte of the page is read, the DS28E15 transmits a CRC of the page data for the master to verify the data integrity.
+//-----------------------------------------------------------------
+/*Reading  DS28E15 EEPROM Data From Specified starting Segment  to 
+last Segment in Specified Page. The Read Memory command is used to 
+read the user memory. The page number and segment number specify 
+where the reading begins.After the last byte of the page is read, 
+the DS28E15 transmits a CRC of the page data for the master to 
+verify the data integrity.
 // Input parameter: 
-1. unsigned char Segment : specify the location within the selected memory page at which the reading begins
-2. unsigned char Page : specifies the memory page at which the reading begins.
-                        Valid memory page numbers are 0 (page 0) and 1 (page 1).
+1. unsigned char Segment : specify the location within the selected 
+   memory page at which the reading begins
+2. unsigned char Page : specifies the memory page at which the 
+   reading begins. Valid memory page numbers are 0 (page 0) 
+   and 1 (page 1).
 3. unsigned char *Receive : Receiving Data buffer                      
 // Returns:  AAh = success
              FFh = CRC Error
@@ -479,15 +504,19 @@ uchar SecureAuth::ReadMemory(uchar Segment, uchar Page, uchar* Receive)
 	return 0xAA;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------
 /*
-The Load and Lock Secret command is used to install a predefined secret when the DS28E15 is first set up for an
-application. This command takes the data in the scratchpad and copies it to the secret memory.
+The Load and Lock Secret command is used to install a predefined 
+secret when the DS28E15 is first set up for an application. 
+This command takes the data in the scratchpad and copies it 
+to the secret memory.
 // Input parameter: 
-   1. bool SecretLock_Enable : specify whether Lock secret after Loading the secret to Secret memory
+   1. bool SecretLock_Enable : specify whether Lock secret 
+      after Loading the secret to Secret memory
 // Returns: AAh = success
             FFh = CRC Error
-            55h = The command failed because the secret was already locked.
+            55h = The command failed because the secret was 
+                  already locked.
 */
 uchar SecureAuth::LoadAndLockSecret(bool SecretLock_Enable)
 {
@@ -536,15 +565,18 @@ uchar SecureAuth::LoadAndLockSecret(bool SecretLock_Enable)
 	return outcome;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------
 /*
-The Seting and Lock Secret command is used to install specified secret in application .
+The Seting and Lock Secret command is used to install 
+specified secret in application .
 // Input parameter: 
    1.unsigned char *secret : Secret buffer ready for loading 
-   2.bool LockEnable : specify whether locking secret after loading completion
+   2.bool LockEnable : specify whether locking secret after 
+     loading completion
 // Returns: AAh = success
             FFh = CRC Error
-            55h = The command failed because the secret was already locked.
+            55h = The command failed because the secret was 
+                  already locked.
 
 */
 uchar SecureAuth::SettingAndLockSecret(uchar* secret, bool LockEnable)
@@ -559,19 +591,27 @@ uchar SecureAuth::SettingAndLockSecret(uchar* secret, bool LockEnable)
 	return ret;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------
 /*  Read BlockStatus 
-The Read Block Status command is used to read the memory block protection settings and to read the device’s personality
-bytes. The parameter byte determines whether the command reads the block protection or the device personality.
+The Read Block Status command is used to read the memory block 
+protection settings and to read the device’s personality bytes. 
+The parameter byte determines whether the command reads the block 
+protection or the device personality.
 // Input parameter: 
-   1.unsigned char BlockNum : specify starting Block number for protection status reading . DS28E15 include 4 Block, every block include 16Bytes.
-   2.bool PersonalityByteIndicator : specify reading memory block protection settings or  reading the device’s personality   
-   3.unsigned char *BlockStatus : storing data buffer for Block protection setting or device's personality.
+   1.unsigned char BlockNum : specify starting Block number for 
+     protection status reading . DS28E15 include 4 Block, every 
+     block include 16Bytes.
+   2.bool PersonalityByteIndicator : specify reading memory block 
+     protection settings or  reading the device’s personality   
+   3.unsigned char *BlockStatus : storing data buffer for Block 
+     protection setting or device's personality.
 // Returns: AAh = success
             FFh = CRC Error
            
 */
-uchar SecureAuth::ReadBlockStatus(uchar BlockNum, bool PersonalityByteIndicator, uchar* BlockStatus)
+uchar SecureAuth::ReadBlockStatus(uchar BlockNum, 
+                                  bool PersonalityByteIndicator, 
+                                  uchar* BlockStatus)
 {
 	uchar cnt = 0, i;
 //	memset(pbuf, 0x0, 20);
@@ -583,7 +623,8 @@ uchar SecureAuth::ReadBlockStatus(uchar BlockNum, bool PersonalityByteIndicator,
 
 	/* construct a packet to send */
 	pbuf[cnt++] = ReadStausCommand;
-	pbuf[cnt++] = PersonalityByteIndicator ? 0xE0 : (BlockNum & 0x03);
+	pbuf[cnt++] = PersonalityByteIndicator ? 
+        0xE0 : (BlockNum & 0x03);
 
 	/* Send Data */
 	for (i = 0; i < cnt; i++)
@@ -642,13 +683,22 @@ uchar SecureAuth::ReadBlockStatus(uchar BlockNum, bool PersonalityByteIndicator,
 	return 0xAA;
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------
 /* Set Block Protection According to protection mode parameter 
-The Write Block Protection command is used to set the protection of user memory blocks. 
-The parameter byte specifies the desired protection modes.Once set, a protection cannot be reset.
+The Write Block Protection command is used to set the 
+protection of user memory blocks. The parameter byte specifies 
+the desired protection modes.Once set, a protection cannot 
+be reset.
 // Input parameter: 
-   1.unsigned char Block : specify Block number for EEPROM protection . DS28E15 include 4 Block, every block include 16Bytes.EEPROM protection apply to specified Block.
-   2.unsigned char ProtectOption:  Blcok protection modes include :1. Read Protection; 2.Write Protection; 3.EPROM Emulation Mode (EM);4.Authentication Protection;                
+   1.unsigned char Block : specify Block number for 
+     EEPROM protection . DS28E15 include 4 Block, every block 
+     include 16Bytes.EEPROM protection apply to specified Block.
+   2.unsigned char ProtectOption:  
+     Blcok protection modes include :
+        1. Read Protection; 
+        2.Write Protection; 
+        3.EPROM Emulation Mode (EM);
+        4.Authentication Protection;                
 // Returns: AAh = success
             FFh = CRC Error
             55h = Authentication Mac No Match 
@@ -702,8 +752,10 @@ uchar SecureAuth::WriteBlockProtection(uchar Block, uchar ProtectOption)
 // Input parameter: 
    1.RomID  :64Bits RomID Receiving Buffer 
                     
-// Returns: 0x01 = success ,RomID CRC check is right ,RomID Sotred in RomID Buffer
-            0x00 = failure , maybe on_reset() Error ,or CRC check Error;
+// Returns: 0x01 = success ,RomID CRC check is right ,
+                    RomID Sotred in RomID Buffer
+            0x00 = failure , maybe on_reset() Error ,
+                   or CRC check Error;
 */
 uchar SecureAuth::ReadRomID(uchar* RomID)
 {
@@ -739,20 +791,25 @@ uchar SecureAuth::ReadRomID(uchar* RomID)
 	}
 }
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------
 /*
-The Compute and Lock Secret command is used to install a computed, device specific secret when the DS28E15 is
-set up for an application. To increase the security level, one can use this command multiple times, each time with a
-different partial secret written to the scratchpad data. The initial secret must be loaded, but not locked, before Compute
-and Lock Secret can be executed.
+The Compute and Lock Secret command is used to install a computed, 
+device specific secret when the DS28E15 is set up for an application. 
+To increase the security level, one can use this command multiple 
+times, each time with a different partial secret written to the 
+scratchpad data. The initial secret must be loaded, but not locked, 
+before Compute and Lock Secret can be executed.
 // Input parameter: 
-   1.unsigned char PageNum :specifies the memory page that is to be used for the MAC computation.
-                            Valid memory page numbers are 0 (page 0) and 1 (page 1).
-   2.bool LockEnable:  specify whether the secret is to be write protected (locked) after it is copied to the secret memory
+   1.unsigned char PageNum :specifies the memory page that is to 
+     be used for the MAC computation. Valid memory page numbers 
+     are 0 (page 0) and 1 (page 1).
+   2.bool LockEnable:  specify whether the secret is to be write 
+     protected (locked) after it is copied to the secret memory
                      
 // Returns: AAh = success
             FFh = CRC Error
-            55h = The command failed because the secret was already locked.
+            55h = The command failed because the secret was 
+                  already locked.
 
 */
 uchar SecureAuth::ComputeAndLockSecret(uchar PageNum, bool LockEnable)
@@ -805,9 +862,13 @@ uchar SecureAuth::ComputeAndLockSecret(uchar PageNum, bool LockEnable)
 
 // Write one page to EEPROM memory of DS28E15 (32 bytes)
 // Returns: AAh = success
-// 			55h = The command failed because master authentication is required.
-// 			33h = The command failed because the memory block is write protected.
-// 			53h = The command failed because the memory block is write protected and requires master authentication.
+// 			55h = The command failed because master 
+//                authentication is required.
+// 			33h = The command failed because the memory 
+//                block is write protected.
+// 			53h = The command failed because the memory 
+//                block is write protected and requires 
+//                master authentication.
 // 			FFh = CRC Error
 //          01h = PageNum Error
 uchar SecureAuth::WriteMemoryPage(uchar PageNum, uchar* WriteData)
@@ -829,22 +890,28 @@ uchar SecureAuth::WriteMemoryPage(uchar PageNum, uchar* WriteData)
 	return check;
 }
 
-//--------------------------------------------------------------------------
+//-------------------------------------------------------------------
 /*Write 4-byte to EEPROM memory of DS28E15
-This command is applicable only to memory blocks that do not require master authentication (authentication
-protection not activated). Additionally, the memory block must not be write protected.
+This command is applicable only to memory blocks that do not require 
+master authentication (authentication protection not activated). 
+Additionally, the memory block must not be write protected.
 // Input parameter: 
-   1.unsigned char Segment : Specify Writing Segment Number  ;DS28E15 EEPROM include 2 Pages ,Each Page 32Bytes ; 
-                    Each Pages include 4 Block ; every Block 16Bytes ;
-                    Eevry Block include 4 Segment ;every Segment include 4 Bytes;
-                    DS28E15 writing according to Segment alignment, 4 Bytes every writing cycle.
+   1.unsigned char Segment : Specify Writing Segment Number;  
+     DS28E15 EEPROM include 2 Pages ,Each Page 32Bytes ; 
+     Each Pages include 4 Block ; every Block 16Bytes ;
+     Eevry Block include 4 Segment ;every Segment include 4 Bytes;
+     DS28E15 writing according to Segment alignment, 4 Bytes every 
+     writing cycle.
    2.unsigned char Page: specify Writing Page Number;
    3.unsigned char *Buffer: Data Buffer writing to DS28E15 EEPROM
           
 // Returns: AAh = success
-            55h = The command failed because master authentication is required.
-            33h = The command failed because the memory block is write protected.
-            53h = The command failed because the memory block is write protected and requires master authentication.
+            55h = The command failed because master authentication 
+                  is required.
+            33h = The command failed because the memory block is 
+                  write protected.
+            53h = The command failed because the memory block is 
+                  write protected and requires master authentication.
             FFh = CRC Error
 */
 uchar SecureAuth::WriteMemory(uchar Segment, uchar Page, uchar* Buffer)
@@ -1025,7 +1092,8 @@ void SecureAuth::sha_copy32(ulong* p1, ulong* p2, ushort length)
 //----------------------------------------------------------------------
 // SHA-256 support function
 //
-void SecureAuth::sha_copyWordsToBytes32(ulong* input, uchar* output, ushort numwords)
+void SecureAuth::sha_copyWordsToBytes32(ulong* input, uchar* output, 
+                                        ushort numwords)
 {
 	ulong temp;
 	ushort i;
@@ -1111,8 +1179,10 @@ void SecureAuth::sha256_hashblock(uchar* message, ushort lastblock)
 		Wt = sha_getW(i);
 		Kt = SHA_CONSTANTS[i]; 
 
-		nodeT1 = (h32 + sha_bigsigma256_1(e32) + sha_ch(e32,f32,g32) + Kt + Wt); // & 0xFFFFFFFFL;
-		nodeT2 = (sha_bigsigma256_0(a32) + sha_maj(a32,b32,c32)); // & 0xFFFFFFFFL;
+		nodeT1 = (h32 + sha_bigsigma256_1(e32) + 
+            sha_ch(e32,f32,g32) + Kt + Wt);         // & 0xFFFFFFFFL;
+		nodeT2 = (sha_bigsigma256_0(a32) + 
+            sha_maj(a32,b32,c32));                  // & 0xFFFFFFFFL;
 		h32 = g32;
 		g32 = f32;
 		f32 = e32;
@@ -1163,10 +1233,14 @@ void SecureAuth::sha256_hashblock(uchar* message, ushort lastblock)
 //
 // 'message'  - buffer containing the message 
 // 'skipconst' - skip adding constant on last block (skipconst=1)
-// 'reverse' - reverse order of digest (reverse=1, MSWord first, LSByte first)
-// 'digest'   - result hash digest in byte order used by 1-Wire device
+// 'reverse' - reverse order of digest (reverse=1, MSWord first, 
+//             LSByte first)
+// 'digest'  - result hash digest in byte order used by 1-Wire 
+//              device
 //
-void SecureAuth::ComputeSHA256(uchar* message, short length, ushort skipconst, ushort reverse, uchar* digest)
+void SecureAuth::ComputeSHA256(uchar* message, short length, 
+                               ushort skipconst, ushort reverse, 
+                               uchar* digest)
 {
 	ushort bytes_per_block;
 	ushort nonpaddedlength;
@@ -1264,7 +1338,8 @@ void SecureAuth::ComputeSHA256(uchar* message, short length, ushort skipconst, u
 	4.bool SecretMode: 0-public secret   1-new secret
 // Returns: None;    
 */
-void SecureAuth::ComputeMAC256(uchar *MT, short length, uchar* MAC, bool SecretMode)
+void SecureAuth::ComputeMAC256(uchar *MT, short length, 
+                               uchar* MAC, bool SecretMode)
 {
 	uchar i,j;  
 	uchar tmp[4]; 
@@ -1336,10 +1411,11 @@ void SecureAuth::ComputeMAC256(uchar *MT, short length, uchar* MAC, bool SecretM
 //  Input Parameter: 
     1.unsigned char * MT: buffer containing the message digest 
     2.short length:Length of block to digest
-    3.unsigned char* compare_MAC : MAC in byte order used by 1-Wire device to compare
-                                    with calculate MAC.        
+    3.unsigned char* compare_MAC : MAC in byte order used by 1-Wire
+      device to compare with calculate MAC.        
 */
-bool SecureAuth::VerifyMAC256(uchar * MT, short length, uchar* compare_MAC, bool SecretMode)
+bool SecureAuth::VerifyMAC256(uchar * MT, short length, uchar* 
+                              compare_MAC, bool SecretMode)
 {
 	uchar calc_mac[32];
 	int i;
@@ -1384,7 +1460,8 @@ void SecureAuth::set_secret(uchar* secret)
    Returns: TRUE if compute successful
             FALSE failed to do compute
 */
-void SecureAuth::CalculateNextSecret256(uchar* binding, uchar* partial, int page_num, uchar* manid)
+void SecureAuth::CalculateNextSecret256(uchar* binding, uchar* partial, 
+                                        int page_num, uchar* manid)
 {
 	unsigned char MT[128];
 	unsigned char MAC[64];
@@ -1434,10 +1511,12 @@ uchar SecureAuth::AuthDevice(uchar* cpuid)
 		}
 		
 		// 计算唯一密钥
-		// Personality_Value, EEPROM, Scratch_Writebuffer, Secret_256bit, RomID_Buffer 参与计算
+		// Personality_Value, EEPROM, Scratch_Writebuffer, 
+        // Secret_256bit, RomID_Buffer 参与计算
 		// 结果保存在SECRET[]
 		ReadBlockStatus(0, (bool)1, Personality_Value);
-		CalculateNextSecret256(EEPROM, Scratch_Writebuffer, Page1, &Personality_Value[2]);
+		CalculateNextSecret256(EEPROM, Scratch_Writebuffer, 
+            Page1, &Personality_Value[2]);
 	}
 	else
 	{
@@ -1445,13 +1524,14 @@ uchar SecureAuth::AuthDevice(uchar* cpuid)
 	}
 
 	// AuthSecret
-	// 1. firstly read MAC Value computed by DS28E15 according to Scratch value, secret ,
-	// page data ,Rom id etc.
+	// 1. firstly read MAC Value computed by DS28E15 
+    //    according to Scratch value, secret , page data ,Rom id etc.
 	ReadBlockStatus(0, true, Personality_Value);
 	ReadWriteScratchpad(false, Scratch_Writebuffer);
 	ComputeAndReadPageMAC(false, Page1, MAC_Read_Value);
 
-	/* 2. calculate MAC by "ComputeMAC256 " according to same 128bytes input_data as below */
+	/* 2. calculate MAC by "ComputeMAC256 " according to same 
+          128bytes input_data as below */
 	if (ReadMemory(Segment0, Page1, EEPROM) == 0xAA)
 	{
 		memcpy(MAC_Computer_Datainput, EEPROM, 32);
@@ -1461,7 +1541,8 @@ uchar SecureAuth::AuthDevice(uchar* cpuid)
 		MAC_Computer_Datainput[106] = 0x01;
 
 		/* 3. compare with each other */
-		Verify_outcome = VerifyMAC256(MAC_Computer_Datainput, 119, MAC_Read_Value, true);
+		Verify_outcome = VerifyMAC256(MAC_Computer_Datainput, 119, 
+            MAC_Read_Value, true);
 	}
 	return Verify_outcome;
 }
@@ -1479,7 +1560,8 @@ void SecureAuth::SetEEPROM(uchar* input, uchar* output)
 	FLASH_PageErase(SaveCPUIDAddressInFlash);
 	for (i = 0; i < MaxWriteByteLen; i++)
 	{
-		FLASH_Program_HalfWord(SaveCPUIDAddressInFlash + sizeof(uint16_t) * i, (uint16_t)(*input_tmpprt));
+		FLASH_Program_HalfWord(SaveCPUIDAddressInFlash + 
+            sizeof(uint16_t) * i, (uint16_t)(*input_tmpprt));
 		input_tmpprt++;
 	}
 	HAL_FLASH_Lock();
@@ -1558,7 +1640,8 @@ void SecureAuth::CalculateEEPROM(uchar* input, uchar* output)
 }
 
 // 校验CPU ID与保存的CPU ID 是否一致
-uchar SecureAuth::VerifyEEPROM(uchar* readEEPROM, uchar* inputID)
+uchar SecureAuth::VerifyEEPROM(uchar* readEEPROM, 
+                               uchar* inputID)
 {
 	uchar i;
 	uchar data[MaxWriteByteLen];
@@ -1568,7 +1651,8 @@ uchar SecureAuth::VerifyEEPROM(uchar* readEEPROM, uchar* inputID)
 	// read CPU id from flash
 	for (i = 0; i < MaxWriteByteLen; i++)
 	{
-		tmp = (uchar*)(SaveCPUIDAddressInFlash + sizeof(uint16_t) * i);
+		tmp = (uchar*)(SaveCPUIDAddressInFlash + 
+            sizeof(uint16_t) * i);
 		data[i] = *tmp;
 		if (data[i] != *inputID)
 		{
@@ -1612,7 +1696,8 @@ uchar SecureAuth::LoadSecret(uchar* cpuid)
 
 	// 计算唯一密钥
 	ReadBlockStatus(0, true, Personality_Value);
-	CalculateNextSecret256(EEPROM, Scratch_Writebuffer, Page1, &Personality_Value[2]);
+	CalculateNextSecret256(EEPROM, Scratch_Writebuffer, 
+        Page1, &Personality_Value[2]);
 
 	// 装载密钥
 	if (SettingAndLockSecret(SECRET, false) != 0xAA)

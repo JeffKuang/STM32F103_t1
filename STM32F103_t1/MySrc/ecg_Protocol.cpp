@@ -56,12 +56,15 @@ bool Protocol::send(const void* data, size_t size, bool reliable)
     assert_param(size <= Frame::MaxDataSize);
     if (!m_isReliableSending) {
         // 只有不在发送可靠数据帧时，才能进入此处代码块
-        m_isReliableSending = reliable; // 根据reliable的值来设置m_isReliableSending
+        // 根据reliable的值来设置m_isReliableSending
+        m_isReliableSending = reliable; 
         if (reliable) {
-            m_retry = ReliableSendRetry; // 初始化重发次数，在processResend()中会被自减
+            // 初始化重发次数，在processResend()中会被自减
+            m_retry = ReliableSendRetry; 
         }
         // 使用相应的参数对发送帧sendingFrame进行初始化
-        m_sendingFrame.header.type = reliable ? Frame::tyReliableData : Frame::tyUnreliableData;
+        m_sendingFrame.header.type = reliable ? 
+            Frame::tyReliableData : Frame::tyUnreliableData;
         ++m_sendingFrame.header.id;
         m_sendingFrame.header.dataSize = size;
         m_sendingFrame.header.dataSizeAnti = ~m_sendingFrame.header.dataSize;
@@ -77,10 +80,13 @@ bool Protocol::send(const void* data, size_t size, bool reliable)
         // 把实际大小的body中最后的扩展字节置0
         memset(m_sendingFrame.body + size, 0, extDataSize);
         // 计算CRC32校验和，并存放到实际大小的body的最后4个字节中
-        CRC32 crc = calcCRC32(reinterpret_cast<dword*>(&m_sendingFrame), (sizeof(m_sendingFrame.header) + size + extDataSize) / sizeof(dword));
+        CRC32 crc = calcCRC32(reinterpret_cast<dword*>(&m_sendingFrame), 
+            (sizeof(m_sendingFrame.header) + size + extDataSize) 
+            / sizeof(dword));
         memcpy(m_sendingFrame.body + size + extDataSize, &crc, Frame::CRCSize);
         // 计算发送数据帧大小
-        m_sendingFrameSize = sizeof(m_sendingFrame.header) + size + extDataSize + Frame::CRCSize;
+        m_sendingFrameSize = sizeof(m_sendingFrame.header) + 
+            size + extDataSize + Frame::CRCSize;
         // 通过USART1发送数据帧
         SoC::getInstance()->sendByUSART1(&m_sendingFrame, m_sendingFrameSize);
         if (reliable) {
@@ -246,7 +252,8 @@ void Protocol::parseInDataSize()
     if (m_token > 0) {
         m_receivingFrame.header.dataSize = m_token;
         // 计算为CRC32算法要求而扩展的数据大小，参考send()函数
-        m_extDataSize = Frame::CRCSize - m_receivingFrame.header.dataSize % Frame::CRCSize;
+        m_extDataSize = Frame::CRCSize - m_receivingFrame.header.dataSize 
+            % Frame::CRCSize;
         if (m_extDataSize == Frame::CRCSize) {
             m_extDataSize = 0;
         }
@@ -263,7 +270,8 @@ void Protocol::parseInDataSize()
 void Protocol::parseInDataSizeAnti()
 {
     m_receivingFrame.header.dataSizeAnti = m_token;
-    if (static_cast<byte>(~m_receivingFrame.header.dataSize) == m_receivingFrame.header.dataSizeAnti) {
+    if (static_cast<byte>(~m_receivingFrame.header.dataSize) == 
+        m_receivingFrame.header.dataSizeAnti) {
         // 如果数据大小校验正确，则做好逐个接收数据字节的准备工作
         m_dataIndex = 0;
         m_state = psInData;
@@ -280,7 +288,9 @@ void Protocol::parseInData()
     m_receivingFrame.body[m_dataIndex++] = m_token;
     if (m_dataIndex >= m_totalDataSize) {
         // 如果接收到所有的数据字节，则可以进行CRC32计算
-        m_crc = calcCRC32(reinterpret_cast<dword*>(&m_receivingFrame), (sizeof(m_receivingFrame.header) + m_totalDataSize) / sizeof(dword));
+        m_crc = calcCRC32(reinterpret_cast<dword*>(&m_receivingFrame), 
+            (sizeof(m_receivingFrame.header) + m_totalDataSize) 
+            / sizeof(dword));
         m_state = psInCRC0;
     }
     nextToken();
