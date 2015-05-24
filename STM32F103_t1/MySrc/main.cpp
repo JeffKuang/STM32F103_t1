@@ -40,6 +40,9 @@
 #include "ecg_SoC.h"
 #include "ecg_Application.h"
 #include "ecg_SecureAuth.h"
+
+
+
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
