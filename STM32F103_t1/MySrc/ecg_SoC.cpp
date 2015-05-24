@@ -38,10 +38,13 @@ void SoC::initialize()
 #if USE_WATCH_DOG
     configureIWDG();
 #endif
-    configureDMA();
+    //configureDMA();
+    MX_DMA_Init();
     configureGPIO();
-    configureUSART1();
-    configureSPI2();
+    //configureUSART1();
+    MX_USART1_UART_Init();
+    //configureSPI2();
+    MX_SPI2_Init();
     configureSysTick();
 #if USE_TIM2
     configureTIM2();
@@ -188,6 +191,7 @@ void SoC::configureIWDG()
 }
 #endif
 
+/*
 void SoC::configureDMA()
 {
 #if USE_USART1_TX_DMA
@@ -223,6 +227,7 @@ void SoC::configureDMA()
 // 	DMA_Init(DMA1_Channel1, &initTypeDef);
 // 	DMA_Cmd(DMA1_Channel1, ENABLE);
 }
+*/
 
 void SoC::configureGPIO()
 {
@@ -298,7 +303,7 @@ void SoC::configureGPIO()
     initTypeDef.Mode = GPIO_MODE_OUTPUT_PP;
     HAL_GPIO_Init(GPIOA, &initTypeDef);
 }
-
+/*
 void SoC::configureUSART1()
 {
     UART_InitTypeDef initTypeDef;
@@ -316,7 +321,9 @@ void SoC::configureUSART1()
 #endif
     USART_Cmd(USART1, ENABLE);
 }
+*/
 
+/*
 void SoC::configureSPI2()
 {
     SPI_InitTypeDef initTypeDef;
@@ -334,6 +341,7 @@ void SoC::configureSPI2()
     SPI_SSOutputCmd(SPI2, ENABLE);
     SPI_Cmd(SPI2, ENABLE);
 }
+*/
 
 void SoC::configureSysTick()
 {

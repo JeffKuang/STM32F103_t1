@@ -143,7 +143,7 @@ SecureAuth* SecureAuth::getInstance()
 
 void SecureAuth::delay_us(uint16_t cnt)
 {
-	volatile u32 i = 0;
+	volatile uint i = 0;
 	for (i = 0; i < cnt*US; i++)
 	{
 	}
@@ -151,7 +151,7 @@ void SecureAuth::delay_us(uint16_t cnt)
 
 void SecureAuth::Delay_Ms(uint16_t cnt)
 {
-	volatile u32 i;
+	volatile uint i;
 	for (i = 0; i < (cnt * MS / 10); i++)
 	{
 	}

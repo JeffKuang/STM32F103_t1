@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * File Name          : USART.c
-  * Date               : 24/05/2015 10:19:02
+  * Date               : 24/05/2015 15:09:15
   * Description        : This file provides code for the configuration
   *                      of the USART instances.
   ******************************************************************************
@@ -35,7 +35,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "usart.h"
-
+#include "stm32f1xx_hal_usart.h"
 #include "gpio.h"
 #include "dma.h"
 
@@ -61,6 +61,8 @@ void MX_USART1_UART_Init(void)
   huart1.Init.OverSampling = UART_OVERSAMPLING_16;
   HAL_UART_Init(&huart1);
 
+  __HAL_USART_ENABLE_IT(&huart1, USART_IT_RXNE);
+  __HAL_USART_ENABLE(&huart1);
 }
 
 void HAL_UART_MspInit(UART_HandleTypeDef* huart)

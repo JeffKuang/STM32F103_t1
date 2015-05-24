@@ -10,6 +10,10 @@
 
 #include "ecg_Core.h"
 #include "ecg_NonCopyable.h"
+#include "spi.h"
+#include "usart.h"
+#include "dma.h"
+#include "stm32f1xx_hal_usart.h"
 
 // 如果编译为Debug版本，则禁止看门狗；Release版本，则使用看门狗
 #ifdef NDEBUG
@@ -154,7 +158,7 @@ private:
     /**
      * 配置SPI2
      */
-    void configureSPI2();
+    //void configureSPI2();
 
     /**
      * 配置SysTick

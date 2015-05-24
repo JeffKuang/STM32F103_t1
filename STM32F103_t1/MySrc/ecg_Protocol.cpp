@@ -176,12 +176,12 @@ void Protocol::getReceiveData(void** data, size_t& size)
 
 void Protocol::handleUSART1()
 {
-    if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET) {
+    if (__HAL_USART_GET_FLAG(&huart1, USART_IT_RXNE) != RESET) {
         byte token = USART_ReceiveData(USART1); // 从UART1接收一个字节作为记号
         USART_ClearITPendingBit(USART1, USART_IT_RXNE);
         m_instance->m_tokenQueue.push(token); // 将记号压入记号队列中
     }
-    if (USART_GetFlagStatus(USART1, USART_FLAG_ORE) != RESET) {
+    if (__HAL_USART_GET_FLAG(&huart1, USART_FLAG_ORE) != RESET) {
         USART_ReceiveData(USART1); // 解决STM32的UART错误标记位的BUG
     }
 }

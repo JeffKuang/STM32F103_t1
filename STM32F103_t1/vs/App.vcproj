@@ -764,6 +764,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\Src\main.c"
+					>
+				</File>
+				<File
 					RelativePath="..\Src\spi.c"
 					>
 				</File>
